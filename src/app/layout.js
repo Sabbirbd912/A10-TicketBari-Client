@@ -13,7 +13,8 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <NextThemeProvider>
           <Navbar />
-          <main className="grow w-11/12">{children}</main>
+          <main className="grow">{children}</main>
+          
         </NextThemeProvider>
       </body>
     </html>

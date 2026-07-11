@@ -46,13 +46,15 @@ export default function Navbar() {
             className="flex items-center gap-2 font-bold text-xl text-foreground hover:opacity-90"
           >
             <Image
-              src="/images/logo/logo-bg.png" 
+              src="/images/logo/logo-bg.png"
               alt="TicketBari Logo"
               width={36}
               height={36}
               className="object-contain rounded-full"
             />
-            <span>TicketBari</span>
+            <span className="bg-linear-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
+              TicketBari
+            </span>
           </Link>
         </div>
         <ul className="hidden items-center gap-6 md:flex">
@@ -115,8 +117,7 @@ export default function Navbar() {
             as={Link}
             href="/register"
             size="sm"
-            color="primary"
-            className="font-medium shadow-sm"
+            className="font-medium shadow-sm bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:opacity-90 transition-opacity"
           >
             Register
           </Button>

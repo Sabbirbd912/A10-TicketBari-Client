@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
         <NextThemeProvider>
           <Navbar />
           <main className="grow">{children}</main>
-          
         </NextThemeProvider>
       </body>
     </html>

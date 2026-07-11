@@ -87,6 +87,16 @@ export default function Navbar() {
           </li>
           <li>
             <Link
+              href="/dashboard"
+              size="sm"
+              color="foreground"
+              className="text-sm font-medium hover:text-primary mr-2"
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/contact"
               color="foreground"
               className="text-sm font-medium hover:text-primary"
@@ -96,14 +106,6 @@ export default function Navbar() {
           </li>
         </ul>
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/dashboard"
-            size="sm"
-            color="foreground"
-            className="text-sm font-medium hover:text-primary mr-2"
-          >
-            Dashboard
-          </Link>
           <Button
             as={Link}
             href="/login"
@@ -113,14 +115,17 @@ export default function Navbar() {
           >
             Login
           </Button>
-          <Button
-            as={Link}
-            href="/register"
-            size="sm"
-            className="font-medium shadow-sm bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:opacity-90 transition-opacity"
-          >
-            Register
-          </Button>
+
+          <Link href="/signup">
+            <Button
+              as="span"
+              size="sm"
+              className="font-medium shadow-sm bg-linear-to-r from-neutral-900 to-emerald-600 text-white hover:opacity-90 transition-opacity"
+            >
+              Register
+            </Button>
+          </Link>
+          
           <div className="pl-1 flex items-center">
             <ThemeSwitch />
           </div>
@@ -157,16 +162,6 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/contact"
-                color="foreground"
-                className="block py-2 text-sm"
-              >
-                Contact
-              </Link>
-            </li>
-            <div className="w-full h-[1px] bg-divider my-2" />
-            <li>
-              <Link
                 href="/dashboard"
                 color="foreground"
                 className="block py-2 text-sm"
@@ -174,6 +169,16 @@ export default function Navbar() {
                 Dashboard
               </Link>
             </li>
+            <li>
+              <Link
+                href="/contact"
+                color="foreground"
+                className="block py-2 text-sm"
+              >
+                Contact
+              </Link>
+            </li>
+
             <div className="grid grid-cols-2 gap-2 mt-2">
               <Button as={Link} href="/login" size="sm" variant="bordered">
                 Login

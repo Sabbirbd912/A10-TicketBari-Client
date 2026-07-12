@@ -1,15 +1,8 @@
 "use client";
 
 import { signOut, useSession } from "@/lib/auth-client";
-import { useState } from "react";
-import {
-  Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Avatar,
-} from "@heroui/react";
+import { useState, useEffect } from "react";
+import { Button, Dropdown, Label, Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -18,9 +11,14 @@ import MyNavLink from "./MyNavLink";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { data, isPending } = useSession();
   const user = data?.user;
-  console.log(user);
+
+  // Safely wait for the client to mount to eliminate all hydration mismatches
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const logOut = () => {
     signOut();
@@ -37,17 +35,10 @@ export default function Navbar() {
     </>
   );
 
-  if (isPending) {
-    return (
-      <div className="w-full h-16 bg-background flex justify-center items-center fixed top-0 z-50 border-b border-divider">
-        <span className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></span>
-      </div>
-    );
-  }
-
   return (
     <div className="sticky top-0 z-40 w-full border-b border-divider bg-background/70 backdrop-blur-lg">
       <header className="flex h-16 items-center justify-between px-6">
+        {/* Left Side: Logo & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -95,60 +86,109 @@ export default function Navbar() {
           </Link>
         </div>
 
+        {/* Center: Desktop Navigation Items */}
         <div className="hidden items-center gap-2 md:flex">{navItems}</div>
 
+        {/* Right Side: Authentication Actions & Dark Mode */}
         <div className="flex items-center gap-3">
-          {user ? (
-            <div className="flex items-center gap-3">
-              <div className="w-16 h-8 rounded-4xl bg-lime-300"></div>
-              <span className="hidden sm:block text-sm font-semibold text-default-700">
-                {user.name}
-              </span>
-
-              <Dropdown
-                placement="bottom-end"
-                className="bg-background border border-divider"
-              >
-                <DropdownTrigger></DropdownTrigger>
-
-                <DropdownMenu aria-label="Profile Actions" variant="flat">
-                  <DropdownItem
-                    key="profile"
-                    as="span"
-                    href="/dashboard"
-                    textValue="My Profile"
-                  >
-                    My Profile
-                  </DropdownItem>
-
-                  <DropdownItem
-                    onClick={logOut}
-                    key="logout"
-                    className="text-danger"
-                    color="danger"
-                    textValue="Log Out"
-                  >
-                    Log Out
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+          {/* Dynamic User Slot */}
+          {!mounted || isPending ? (
+            // Clean, non-breaking spinner block matching layout space
+            <div className="flex items-center justify-center w-8 h-8">
+              <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></span>
             </div>
+          ) : user ? (
+            // Professional Dropdown UI using composition syntax
+            <Dropdown>
+              {/* Trigger Button configured with Avatar & Name */}
+              <Button
+                aria-label="User menu"
+                variant="light"
+                className="flex items-center gap-2 h-auto py-1.5 px-2.5 rounded-full hover:bg-default-100"
+              >
+                <Avatar
+                  className="w-8 h-8 text-sm transition-transform"
+                  color="primary"
+                  name={user?.name}
+                  src={user?.image || undefined}
+                />
+                <span className="hidden sm:block text-sm font-medium text-default-700">
+                  {user?.name}
+                </span>
+              </Button>
+
+              {/* Popover container for options */}
+              <Dropdown.Popover className="bg-background border border-divider shadow-xl rounded-xl min-w-[200px]">
+                <Dropdown.Menu
+                  onAction={(key) => console.log(`Selected: ${key}`)}
+                >
+                  {/* Option 1: Profile Link - Using key instead of id */}
+                  <Dropdown.Item key="profile" textValue="My Profile">
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-2 w-full text-default-700 py-1"
+                    >
+                      <svg
+                        className="w-4 h-4 text-default-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      <Label className="cursor-pointer font-medium text-sm">
+                        My Profile
+                      </Label>
+                    </Link>
+                  </Dropdown.Item>
+
+                  {/* Option 2: Logout Button - Using key instead of id */}
+                  <Dropdown.Item
+                    key="logout"
+                    textValue="Log Out"
+                    variant="danger"
+                  >
+                    <div
+                      onClick={logOut}
+                      className="flex items-center gap-2 w-full text-danger py-1 cursor-pointer"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      <Label className="cursor-pointer font-medium text-sm">
+                        Log Out
+                      </Label>
+                    </div>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown.Popover>
+            </Dropdown>
           ) : (
+            // Guest Layout
             <div className="hidden items-center gap-3 md:flex">
               <Link href="/login">
-                <Button
-                  as="span"
-                  size="sm"
-                  variant="light"
-                  className="font-medium"
-                >
+                <Button size="sm" variant="light" className="font-medium">
                   Login
                 </Button>
               </Link>
 
               <Link href="/signup">
                 <Button
-                  as="span"
                   size="sm"
                   className="font-medium shadow-sm bg-linear-to-r from-neutral-900 to-emerald-600 text-white hover:opacity-90 transition-opacity"
                 >
@@ -158,18 +198,20 @@ export default function Navbar() {
             </div>
           )}
 
+          {/* Theme Toggle Button */}
           <div className="flex items-center">
             <ThemeSwitch />
           </div>
         </div>
       </header>
 
+      {/* Mobile Drawer Navigation */}
       {isMenuOpen && (
         <div className="border-t border-divider md:hidden bg-background">
           <nav className="flex flex-col gap-2 p-4">
             {navItems}
 
-            {!user && (
+            {!user && mounted && !isPending && (
               <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-divider">
                 <Button as={Link} href="/login" size="sm" variant="bordered">
                   Login

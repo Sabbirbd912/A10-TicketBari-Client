@@ -8,16 +8,17 @@ import { Check, ArrowLeft } from "@gravity-ui/icons";
 import {
   Button,
   Card,
-  Description,
   FieldError,
   Form,
   Input,
   Label,
   TextField,
 } from "@heroui/react";
+import { GrGoogle } from "react-icons/gr";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-export default function SignUpPage() {
+export default function LoginPage() {
   const router = useRouter();
 
   const onSubmit = async (e) => {
@@ -25,65 +26,69 @@ export default function SignUpPage() {
     const formData = new FormData(e.currentTarget);
     const userData = Object.fromEntries(formData.entries());
 
-    console.log("form submit data:", userData);
+    console.log("Form submitted with:", userData);
 
-    const { data, error } = await authClient.signUp.email({
-      name: userData.name,
+    const { data, error } = await authClient.signIn.email({
       email: userData.email,
       password: userData.password,
+      rememberMe: true,
       callbackURL: "/",
     });
-
-    console.log("signup response:", { data, error });
+    console.log("sign in response:", { data, error });
 
     if (data) {
-      Swal.fire({
-        title: "Registration Successful!",
-        text: "Welcome aboard! Redirecting you to home...",
-        icon: "success",
-        timer: 2000,
-        showConfirmButton: false,
-      }).then(() => {
-        router.push("/");
-        router.refresh();
-      });
+      toast.success("Log in Successful!");
+      router.push("/");
+      router.refresh();
     }
 
     if (error) {
       Swal.fire({
         icon: "error",
-        title: "Error signing up!",
-        text: error.message || "Something went wrong.",
+        title: "Login Failed!",
+        text: error.message || "Invalid email or password.",
+        confirmButtonColor: "#ef4444",
       });
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    // BetterAuth সোশ্যাল লজিক পরবর্তীতে এখানে কাজ করবে
+    // await authClient.signIn.social({ provider: "google" });
+    console.log("Google sign in triggered");
+  };
+
   return (
     <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 bg-background transition-colors duration-200">
-      <Card className="border border-divider shadow-xl mx-xl w-full max-w-md p-6 md:p-8 rounded-2xl bg-card">
+      <Card className="border border-divider shadow-xl mx-auto w-full max-w-md p-6 md:p-8 rounded-2xl bg-card">
         <div className="text-center mb-6">
           <h1 className="text-xl md:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-neutral-900 to-green-600 dark:from-white dark:to-green-400 bg-clip-text text-transparent">
-            Create an Account
+            Welcome Back
           </h1>
-          <p className="text-sm font-bold text-default-600 mt-2">
-            Join us to book tickets seamlessly
+          <p className="text-sm font-medium text-default-500 mt-2">
+            Log in to manage your tickets
           </p>
         </div>
 
-        <Form className="flex flex-col gap-5" onSubmit={onSubmit}>
-          <TextField isRequired name="name" type="text" className="w-full">
-            <Label className="text-xs font-semibold text-default-600">
-              Name
-            </Label>
-            <Input
-              placeholder="Enter your full name"
-              className="mt-1"
-              variant="bordered"
-              radius="md"
-            />
-            <FieldError className="text-xs text-danger mt-1" />
-          </TextField>
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="bordered"
+          radius="md"
+          className="w-full font-medium border-divider text-default-700 hover:bg-default-100 flex items-center justify-center gap-2 h-11"
+        >
+          <GrGoogle className="text-base text-[#4285F4]" />
+          Continue with Google
+        </Button>
 
+        <div className="relative flex py-4 items-center w-full">
+          <div className="grow border-t border-divider"></div>
+          <span className="shrink mx-4 text-xs text-default-400 font-medium">
+            OR
+          </span>
+          <div className="grow border-t border-divider"></div>
+        </div>
+
+        <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <TextField
             isRequired
             name="email"
@@ -100,7 +105,7 @@ export default function SignUpPage() {
               Email
             </Label>
             <Input
-              placeholder="Enter your email address"
+              placeholder="john@example.com"
               className="mt-1"
               variant="bordered"
               radius="md"
@@ -110,32 +115,27 @@ export default function SignUpPage() {
 
           <TextField
             isRequired
-            minLength={8}
             name="password"
             type="password"
             className="w-full"
-            validate={(value) => {
-              if (value.length < 8)
-                return "Password must be at least 8 characters";
-              if (!/[A-Z]/.test(value))
-                return "Must contain at least one uppercase letter";
-              if (!/[0-9]/.test(value))
-                return "Must contain at least one number";
-              return null;
-            }}
           >
-            <Label className="text-xs font-semibold text-default-600">
-              Password
-            </Label>
+            <div className="flex items-center justify-between">
+              <Label className="text-xs font-semibold text-default-600">
+                Password
+              </Label>
+              <Link
+                href="/forgot-password"
+                className="text-xs text-primary hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <Input
-              placeholder="Create a strong password"
+              placeholder="Enter your password"
               className="mt-1"
               variant="bordered"
               radius="md"
             />
-            <Description className="text-[10px] text-default-400 mt-1 leading-normal">
-              Must be at least 8 characters with 1 uppercase and 1 number.
-            </Description>
             <FieldError className="text-xs text-danger mt-1" />
           </TextField>
 
@@ -146,7 +146,7 @@ export default function SignUpPage() {
               radius="md"
             >
               <Check className="w-4 h-4" />
-              Sign Up
+              Log In
             </Button>
             <Button
               type="reset"
@@ -161,12 +161,12 @@ export default function SignUpPage() {
 
         <div className="mt-6 text-center border-t border-divider pt-4">
           <p className="text-xs text-default-500">
-            Already have an account?{" "}
+            Don&apos;t have an account yet?{" "}
             <Link
-              href="/login"
+              href="/signup"
               className="text-primary font-semibold hover:underline"
             >
-              Log In
+              Register
             </Link>
           </p>
           <Link

@@ -106,16 +106,11 @@ export default function Navbar() {
           </li>
         </ul>
         <div className="hidden items-center gap-3 md:flex">
-          <Button
-            as={Link}
-            href="/login"
-            size="sm"
-            variant="light"
-            className="font-medium"
-          >
-            Login
-          </Button>
-
+          <Link href="/login">
+            <Button as="span" size="sm" variant="light" className="font-medium">
+              Login
+            </Button>
+          </Link>
           <Link href="/signup">
             <Button
               as="span"
@@ -125,7 +120,7 @@ export default function Navbar() {
               Register
             </Button>
           </Link>
-          
+
           <div className="pl-1 flex items-center">
             <ThemeSwitch />
           </div>

@@ -15,7 +15,6 @@ export default function Navbar() {
   const { data, isPending } = useSession();
   const user = data?.user;
 
-  // Safely wait for the client to mount to eliminate all hydration mismatches
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -38,7 +37,6 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-40 w-full border-b border-divider bg-background/70 backdrop-blur-lg">
       <header className="flex h-16 items-center justify-between px-6">
-        {/* Left Side: Logo & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -78,7 +76,7 @@ export default function Navbar() {
               alt="TicketBari Logo"
               width={36}
               height={36}
-              className="object-contain rounded-full"
+              className="object-contain rounded-full h-auto"
             />
             <span className="bg-linear-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
               TicketBari
@@ -86,43 +84,41 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Center: Desktop Navigation Items */}
         <div className="hidden items-center gap-2 md:flex">{navItems}</div>
 
-        {/* Right Side: Authentication Actions & Dark Mode */}
         <div className="flex items-center gap-3">
-          {/* Dynamic User Slot */}
           {!mounted || isPending ? (
-            // Clean, non-breaking spinner block matching layout space
             <div className="flex items-center justify-center w-8 h-8">
               <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></span>
             </div>
           ) : user ? (
-            // Professional Dropdown UI using composition syntax
             <Dropdown>
-              {/* Trigger Button configured with Avatar & Name */}
               <Button
                 aria-label="User menu"
                 variant="light"
                 className="flex items-center gap-2 h-auto py-1.5 px-2.5 rounded-full hover:bg-default-100"
               >
-                <Avatar
-                  className="w-8 h-8 text-sm transition-transform"
-                  color="primary"
-                  name={user?.name}
-                  src={user?.image || undefined}
-                />
+                <Avatar>
+                  <Avatar.Image src={user?.image} alt={user?.name} />
+                  <Avatar.Fallback>
+                    {user?.name
+                      ? user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                      : "U"}
+                  </Avatar.Fallback>
+                </Avatar>
+
                 <span className="hidden sm:block text-sm font-medium text-default-700">
                   {user?.name}
                 </span>
               </Button>
 
-              {/* Popover container for options */}
               <Dropdown.Popover className="bg-background border border-divider shadow-xl rounded-xl min-w-[200px]">
                 <Dropdown.Menu
                   onAction={(key) => console.log(`Selected: ${key}`)}
                 >
-                  {/* Option 1: Profile Link - Using key instead of id */}
                   <Dropdown.Item key="profile" textValue="My Profile">
                     <Link
                       href="/profile"
@@ -147,7 +143,6 @@ export default function Navbar() {
                     </Link>
                   </Dropdown.Item>
 
-                  {/* Option 2: Logout Button - Using key instead of id */}
                   <Dropdown.Item
                     key="logout"
                     textValue="Log Out"
@@ -198,14 +193,12 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Theme Toggle Button */}
           <div className="flex items-center">
             <ThemeSwitch />
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
       {isMenuOpen && (
         <div className="border-t border-divider md:hidden bg-background">
           <nav className="flex flex-col gap-2 p-4">

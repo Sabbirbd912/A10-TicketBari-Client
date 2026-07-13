@@ -53,9 +53,10 @@ export default function LoginPage() {
   };
 
   const handleGoogleSignIn = async () => {
-    // BetterAuth সোশ্যাল লজিক পরবর্তীতে এখানে কাজ করবে
-    // await authClient.signIn.social({ provider: "google" });
-    console.log("Google sign in triggered");
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+    console.log("Google sign in triggered", data);
   };
 
   return (

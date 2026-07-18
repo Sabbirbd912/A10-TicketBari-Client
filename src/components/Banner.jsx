@@ -99,7 +99,6 @@ export default function Banner() {
                     as="span"
                     size="lg"
                     radius="md"
-                    // bg-gradient-to-r এর মাধ্যমে কাস্টম গ্রেডিয়েন্ট সেট করা হয়েছে
                     className="bg-linear-to-r from-emerald-500 to-neutral-950 text-white font-semibold shadow-lg hover:opacity-95 hover:scale-105 transition-all duration-200"
                   >
                     Book Tickets Now

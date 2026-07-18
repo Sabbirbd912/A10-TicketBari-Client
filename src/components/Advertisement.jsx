@@ -4,7 +4,7 @@ const Advertisement =async () => {
     const res = await fetch("http://localhost:5000/alltickets");
     const data = await res.json();
     const popularTickets=data.slice(0,6);
-    // console.log(data);
+    console.log(data);
 
 
 

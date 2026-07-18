@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "@heroui/react";
 import Image from "next/image";
 import { LogoFacebook, Envelope } from "@gravity-ui/icons";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const [mounted, setMounted] = useState(false);
@@ -12,8 +13,13 @@ export default function Footer() {
     setMounted(true);
   }, []);
 
-  // Hydration error এড়াতে mounted হওয়ার পর ডাইনামিক বছর দেখাবে
+
   const currentYear = mounted ? new Date().getFullYear() : 2026;
+// remove footer for Dashboard route
+    const pathname = usePathname()
+    if(pathname.includes("dashboard")){
+      return null
+    }
 
   return (
     <footer className="w-full bg-background text-foreground border-t border-divider transition-colors duration-200">

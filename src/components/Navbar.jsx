@@ -8,6 +8,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { ThemeSwitch } from "./ThemeToggle";
 import MyNavLink from "./MyNavLink";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,11 +29,16 @@ export default function Navbar() {
     <>
       <MyNavLink href="/">Home</MyNavLink>
       <MyNavLink href="/about">About</MyNavLink>
-      <MyNavLink href="/ticket">Ticket</MyNavLink>
+      <MyNavLink href="/alltickets">Ticket</MyNavLink>
       <MyNavLink href="/dashboard">Dashboard</MyNavLink>
       <MyNavLink href="/contact">Contact</MyNavLink>
     </>
   );
+// remove Navbar for Dashboard route
+  const pathname = usePathname()
+  if(pathname.includes("dashboard")){
+    return null
+  }
 
   return (
     <div className="sticky top-0 z-40 w-full border-b border-divider bg-background/70 backdrop-blur-lg">

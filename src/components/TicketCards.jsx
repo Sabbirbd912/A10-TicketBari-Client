@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const TicketCards = ({ ticket }) => {
   if (!ticket) return null;
 
   return (
     <div className="w-full max-w-sm mx-auto transition-all duration-300 group h-full flex flex-col">
-      <div className="relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden flex flex-col flex-1 select-none border border-slate-100 dark:border-slate-800 shadow-md group-hover:shadow-xl transition-shadow duration-300">
-        {/* Top Image Section */}
+      <div className="relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden flex flex-col flex-1 select-none border border-slate-100 dark:border-slate-800 shadow-md group-hover:shadow-xl transition-shadow duration-300 h-full">
         <div className="relative h-48 sm:h-52 bg-slate-950 text-white overflow-hidden shrink-0">
           <Image
             width={400}
@@ -36,7 +36,6 @@ const TicketCards = ({ ticket }) => {
             </h3>
           </div>
 
-          {/* Perks Section */}
           {ticket.perks && ticket.perks.length > 0 && (
             <div className="pt-3 border-t border-slate-100 dark:border-slate-800 shrink-0">
               <p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-2.5">
@@ -85,7 +84,10 @@ const TicketCards = ({ ticket }) => {
         </div>
 
         <div className="bg-slate-50 dark:bg-slate-900/50 px-5 sm:px-6 py-4 border-t border-slate-100 dark:border-slate-800 shrink-0">
-          <button className="w-full bg-slate-900 dark:bg-slate-800 text-white font-extrabold text-sm px-5 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-lime-400 hover:text-slate-950 dark:hover:bg-lime-400 dark:hover:text-slate-950 transition-all duration-200 active:scale-[0.98]">
+          <Link
+            href={`/alltickets/${ticket._id}`}
+            className="w-full bg-slate-900 dark:bg-slate-800 text-white font-extrabold text-sm px-5 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-lime-400 hover:text-slate-950 dark:hover:bg-lime-400 dark:hover:text-slate-950 transition-all duration-200 active:scale-[0.98]"
+          >
             See Details
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +103,7 @@ const TicketCards = ({ ticket }) => {
                 d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

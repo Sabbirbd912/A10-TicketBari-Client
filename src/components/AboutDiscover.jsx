@@ -78,10 +78,6 @@ export default function AboutDiscover() {
               </div>
             ))}
           </div>
-
-          <Button className="px-8 py-6 rounded-full font-bold bg-slate-900 hover:bg-emerald-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 text-white shadow-md hover:shadow-emerald-500/20 transition-all duration-300">
-            About Us
-          </Button>
         </div>
         <div className="lg:col-span-3 flex justify-center items-center">
           <div className="w-72 sm:w-80 h-[420px] rounded-[32px] overflow-hidden shadow-xl border border-slate-200/60 dark:border-zinc-800/60 flex flex-col relative group">

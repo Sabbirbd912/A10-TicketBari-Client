@@ -19,7 +19,7 @@ export default function Banner() {
     {
       id: 1,
       image:
-        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200",
+        "/images/slider/one-bus.jpeg",
       title: "Grab Your Bus Tickets",
       subtitle:
         "Travel across the country safely with top-rated bus operators.",
@@ -28,7 +28,7 @@ export default function Banner() {
     {
       id: 2,
       image:
-        "https://plus.unsplash.com/premium_photo-1661952633186-adf9f47719c3?q=80&w=870",
+        "/images/slider/two-train.jpg",
       title: "Fast & Comfortable Train Journey",
       subtitle:
         "Avoid traffic jams. Book your train seats instantly from home.",
@@ -37,7 +37,7 @@ export default function Banner() {
     {
       id: 3,
       image:
-        "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200",
+        "/images/slider/four-plain.jpg",
       title: "Fly High with TicketBari",
       subtitle:
         "Get exclusive discounts on domestic and international flights.",
@@ -46,7 +46,7 @@ export default function Banner() {
     {
       id: 4,
       image:
-        "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?q=80&w=1200",
+        "/images/slider/three-ship.jpg",
       title: "Scenic Waterways & Launch Tickets",
       subtitle: "Enjoy a relaxing journey through the rivers of Bangladesh.",
       link: "/tickets?type=launch",

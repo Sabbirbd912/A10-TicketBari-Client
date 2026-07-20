@@ -13,16 +13,7 @@ export default function ContactPage() {
   return (
     <section className="min-h-screen bg-background px-4 py-12 md:px-8 lg:px-16 flex justify-center items-center">
       <div className="max-w-6xl w-full mx-auto space-y-12">
-        <div className="text-center space-y-2">
-          <span className="text-emerald-400 font-serif italic text-lg md:text-xl font-medium">
-            Get In Touch
-          </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight">
-            Our Contact Information
-          </h2>
-        </div>
-
-        <Card className="bg-[#f4efe9] dark:bg-zinc-800 border-none shadow-sm rounded-3xl p-6 sm:p-10 md:p-14">
+        <Card className="bg-green-50 dark:bg-zinc-800 border-none shadow-sm rounded-3xl p-6 sm:p-10 md:p-14">
           <div className="space-y-8">
             <div className="text-center space-y-2">
               <span className="text-lime-500 font-serif italic text-lg md:text-xl font-medium">
@@ -92,7 +83,7 @@ export default function ContactPage() {
         </Card>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Address Card */}
-          <Card className="bg-[#f4efe9] dark:bg-zinc-800 border-none shadow-sm rounded-2xl p-6">
+          <Card className="bg-green-50 dark:bg-zinc-800 border-none shadow-sm rounded-2xl p-6">
             <div className="flex flex-row items-center gap-4">
               <div className="bg-[#211f26] text-white p-3.5 rounded-full flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5" />
@@ -109,7 +100,7 @@ export default function ContactPage() {
           </Card>
 
           {/* Phone Card */}
-          <Card className="bg-[#f4efe9] dark:bg-zinc-800 border-none shadow-sm rounded-2xl p-6">
+          <Card className="bg-green-50 dark:bg-zinc-800 border-none shadow-sm rounded-2xl p-6">
             <div className="flex flex-row items-center gap-4">
               <div className="bg-[#211f26] text-white p-3.5 rounded-full flex items-center justify-center shrink-0">
                 <Phone className="w-5 h-5" />
@@ -126,7 +117,7 @@ export default function ContactPage() {
           </Card>
 
           {/* Email Card */}
-          <Card className="bg-[#f4efe9] dark:bg-zinc-800 border-none shadow-sm rounded-2xl p-6">
+          <Card className="bg-green-50 dark:bg-zinc-800 border-none shadow-sm rounded-2xl p-6">
             <div className="flex flex-row items-center gap-4">
               <div className="bg-[#211f26] text-white p-3.5 rounded-full flex items-center justify-center shrink-0">
                 <Mail className="w-5 h-5" />
@@ -143,7 +134,7 @@ export default function ContactPage() {
           </Card>
         </div>
 
-        <Card className="bg-[#f4efe9] dark:bg-zinc-800 border-none shadow-sm rounded-3xl p-3 sm:p-4 overflow-hidden">
+        <Card className="bg-green-50 dark:bg-zinc-800 border-none shadow-sm rounded-3xl p-3 sm:p-4 overflow-hidden">
           <div className="w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden">
             <iframe
               title="Google Map Location"

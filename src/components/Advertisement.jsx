@@ -6,8 +6,6 @@ const Advertisement =async () => {
     const popularTickets=data.slice(0,6);
     // console.log(data);
 
-
-
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-12">
             <h2 className="text-3xl text-center font-bold mb-8">Popular Tickets</h2>

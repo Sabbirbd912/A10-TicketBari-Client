@@ -37,10 +37,10 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto my-10 px-4">
-      <Card className="p-4 shadow-sm border border-default-100">
+    <div className="max-w-md mx-auto my-16 px-4">
+      <Card className="p-8 shadow-sm border border-default-100">
         <Card.Content className="flex flex-col items-center gap-4 text-center">
-          <Avatar className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
+          <Avatar className="w-24 h-24 md:w-44 md:h-44 rounded-full overflow-hidden">
             <Avatar.Image
               alt="Sabbir Ahmed"
               src={user?.image}

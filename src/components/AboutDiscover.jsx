@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Button } from "@heroui/react";
 
 export default function AboutDiscover() {
@@ -27,9 +28,11 @@ export default function AboutDiscover() {
             <div className="absolute inset-2 rounded-full border-[3px] border-sky-500 dark:border-sky-400 clip-path-accent" />
 
             <div className="w-[88%] h-[88%] rounded-full overflow-hidden border-[6px] border-white dark:border-zinc-900 shadow-xl z-10">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?q=80&w=811&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Our Stewardess / Pilot Representative"
+                width={811}
+                height={811}
                 className="w-full h-full object-cover object-center scale-105"
               />
             </div>
@@ -89,9 +92,11 @@ export default function AboutDiscover() {
               </h3>
 
               <div className="relative w-36 h-36 flex items-center justify-center bg-zinc-800/50 rounded-full border border-zinc-700/50 backdrop-blur-sm z-10">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=300"
                   alt="Abstract render"
+                  width={300}
+                  height={300}
                   className="w-24 h-24 rounded-full object-cover animate-[spin_60s_linear_infinite]"
                 />
               </div>

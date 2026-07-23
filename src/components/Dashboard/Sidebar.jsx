@@ -42,6 +42,28 @@ const Sidebar = () => {
         >
           <span>👤</span> My Profile
         </Link>
+
+        <Link
+          href="/dashboard/addticket"
+          className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
+            pathname === "/dashboard/addticket"
+              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
+          }`}
+        >
+          <span>➕</span> Add Tickets
+        </Link>
+
+        <Link
+          href="/dashboard/manageticket"
+          className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
+            pathname === "/dashboard/manageticket"
+              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
+          }`}
+        >
+          <span>🎫</span> Manage Ticket
+        </Link>
       </div>
 
       <div className="p-4 border-t border-slate-100 dark:border-slate-800">

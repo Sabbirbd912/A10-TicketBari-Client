@@ -1,7 +1,7 @@
 "use client";
 
 import { signOut, useSession } from "@/lib/auth-client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Dropdown, Label, Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,13 +12,8 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { data, isPending } = useSession();
   const user = data?.user;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const logOut = () => {
     signOut();
@@ -93,7 +88,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-2 md:flex">{navItems}</div>
 
         <div className="flex items-center gap-3">
-          {!mounted || isPending ? (
+          {isPending ? (
             <div className="flex items-center justify-center w-8 h-8">
               <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></span>
             </div>
@@ -210,7 +205,7 @@ export default function Navbar() {
           <nav className="flex flex-col gap-2 p-4">
             {navItems}
 
-            {!user && mounted && !isPending && (
+            {!user && !isPending && (
               <div className="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-divider">
                 <Button as={Link} href="/login" size="sm" variant="bordered">
                   Login

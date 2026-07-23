@@ -1,25 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { Link } from "@heroui/react";
 import Image from "next/image";
 import { LogoFacebook, Envelope } from "@gravity-ui/icons";
 import { usePathname } from "next/navigation";
 
 export default function Footer() {
-  const [mounted, setMounted] = useState(false);
+  const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-
-  const currentYear = mounted ? new Date().getFullYear() : 2026;
-// remove footer for Dashboard route
-    const pathname = usePathname()
-    if(pathname.includes("dashboard")){
-      return null
-    }
+  if (pathname.includes("dashboard")) {
+    return null;
+  }
 
   return (
     <footer className="w-full bg-background text-foreground border-t border-divider transition-colors duration-200">

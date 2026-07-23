@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -10,11 +11,21 @@ const Sidebar = () => {
   return (
     <aside className="hidden md:flex flex-col w-64 h-full shrink-0 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
       <div className="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800">
-        <Link href="/">
-          <span className="font-black text-lg tracking-tight bg-gradient-to-r from-emerald-500 to-lime-400 bg-clip-text text-transparent cursor-pointer">
-            TicketBari
-          </span>
-        </Link>
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold text-xl text-foreground hover:opacity-90"
+          >
+            <Image
+              src="/images/logo/logo-bg.png"
+              alt="TicketBari Logo"
+              width={36}
+              height={36}
+              className="object-contain rounded-full h-auto"
+            />
+            <span className="bg-linear-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
+              TicketBari
+            </span>
+          </Link>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-1">

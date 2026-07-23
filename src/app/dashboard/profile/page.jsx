@@ -3,6 +3,7 @@
 import React from "react";
 import { Card, Avatar, Spinner } from "@heroui/react";
 import { useSession } from "@/lib/auth-client";
+import { UpdateUserProfile } from "@/components/UpdateProfile";
 
 const ProfilePage = () => {
   const { data, isPending, error } = useSession();
@@ -37,24 +38,28 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto my-10 px-4">
-      <Card className="p-4 shadow-sm border border-default-100">
-        <Card.Content className="flex flex-col items-center gap-4 text-center">
-          <Avatar className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
+    <div className="max-w-2xl mx-auto my-12 px-4">
+      <Card className="p-8 md:p-10 shadow-md border border-default-100">
+        <Card.Content className="flex flex-col items-center gap-6 text-center">
+          <Avatar className="w-28 h-28 md:w-40 md:h-40 rounded-xl overflow-hidden">
             <Avatar.Image
-              alt="Sabbir Ahmed"
+              alt={user?.name || "User Avatar"}
               src={user?.image}
               referrerPolicy="no-referrer"
               className="object-cover"
             />
-            <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+            <Avatar.Fallback>{user?.name?.charAt(0) || "U"}</Avatar.Fallback>
           </Avatar>
 
-          <div className="space-y-1">
-            <h1 className="text-2xl font-bold text-foreground">
-              {user.name || "User"}
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold text-foreground">
+              {user?.name || "User"}
             </h1>
-            <p className="text-sm text-default-500">{user.email}</p>
+            <p className="text-base text-default-500">{user?.email}</p>
+          </div>
+
+          <div className="pt-2">
+            <UpdateUserProfile user={user} />
           </div>
         </Card.Content>
       </Card>

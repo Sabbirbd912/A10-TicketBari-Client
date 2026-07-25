@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const TicketDetailPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`http://localhost:5000/alltickets/${id}`, {
+  const res = await fetch(`http://localhost:5000/tickets/${id}`, {
     cache: "no-store", 
   });
   

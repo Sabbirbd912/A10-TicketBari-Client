@@ -23,15 +23,18 @@ export default function Navbar() {
   const navItems = (
     <>
       <MyNavLink href="/">Home</MyNavLink>
+      <MyNavLink href="/alltickets">All Ticket</MyNavLink>
       <MyNavLink href="/about">About</MyNavLink>
-      <MyNavLink href="/alltickets">Ticket</MyNavLink>
-      <MyNavLink href="/dashboard">Dashboard</MyNavLink>
       <MyNavLink href="/contact">Contact</MyNavLink>
+      {!isPending && user && (
+        <MyNavLink href="/dashboard">Dashboard</MyNavLink>
+      )}
     </>
   );
-// remove Navbar for Dashboard route
+
+  // remove Navbar for Dashboard route
   const pathname = usePathname()
-  if(pathname.includes("dashboard")){
+  if (pathname.includes("dashboard")) {
     return null
   }
 
@@ -85,7 +88,9 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">{navItems}</div>
+        <div className="hidden items-center gap-2 md:flex">
+          {navItems}
+        </div>
 
         <div className="flex items-center gap-3">
           {isPending ? (
@@ -104,39 +109,31 @@ export default function Navbar() {
                   <Avatar.Fallback>
                     {user?.name
                       ? user.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
                       : "U"}
                   </Avatar.Fallback>
                 </Avatar>
 
                 <span className="hidden sm:block text-sm font-medium text-default-700">
-                  {user?.name}
+                  {user?.name.split(" ")[0]}
                 </span>
               </Button>
 
-              <Dropdown.Popover className="bg-background border border-divider shadow-xl rounded-xl min-w-[200px]">
-                <Dropdown.Menu
-                  onAction={(key) => console.log(`Selected: ${key}`)}
-                >
+              <Dropdown.Popover className="bg-background border border-divider shadow-xl rounded-xl min-w-50">
+                <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)} >
+
+                  <Dropdown.Item key="username" textValue="User Name" className="border border-[#00BC7D] rounded-xl">
+                    <Label className="cursor-pointer font-medium text-sm text-[#00BC7D] ">
+                      {user?.name}
+                    </Label>
+                  </Dropdown.Item>
+
                   <Dropdown.Item key="profile" textValue="My Profile">
-                    <Link
-                      href="/profile"
-                      className="flex items-center gap-2 w-full text-default-700 py-1"
-                    >
-                      <svg
-                        className="w-4 h-4 text-default-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
+                    <Link href="/profile" className="flex items-center gap-2 w-full text-default-700 py-1" >
+                      <svg className="w-4 h-4 text-default-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                       <Label className="cursor-pointer font-medium text-sm">
                         My Profile
@@ -144,33 +141,17 @@ export default function Navbar() {
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item
-                    key="logout"
-                    textValue="Log Out"
-                    variant="danger"
-                  >
-                    <div
-                      onClick={logOut}
-                      className="flex items-center gap-2 w-full text-danger py-1 cursor-pointer"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                        />
+                  <Dropdown.Item key="logout" textValue="Log Out" variant="danger" >
+                    <button onClick={logOut} className="flex items-center gap-2 w-full text-danger py-1 cursor-pointer" >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                       </svg>
                       <Label className="cursor-pointer font-medium text-sm">
                         Log Out
                       </Label>
-                    </div>
+                    </button>
                   </Dropdown.Item>
+
                 </Dropdown.Menu>
               </Dropdown.Popover>
             </Dropdown>

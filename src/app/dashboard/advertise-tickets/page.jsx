@@ -2,7 +2,7 @@ import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
 import { Button, Table } from "@heroui/react";
 import Link from "next/link";
 
-const ManageTicketPage = async () => {
+const AdvertiseTicketPage = async () => {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
   // const res = await fetch("http://localhost:5000/alltickets");
@@ -13,7 +13,7 @@ const ManageTicketPage = async () => {
 
   return (
     <div>
-      <h1 className="mb-5 font-semibold tracking-wide">Available Tickets</h1>
+      <h1 className="mb-5 font-semibold tracking-wide">Available Advertise Tickets</h1>
       <Table>
         <Table.ScrollContainer>
           <Table.Content aria-label="Team members" className="min-w-150">
@@ -67,4 +67,4 @@ const ManageTicketPage = async () => {
   );
 };
 
-export default ManageTicketPage;
+export default AdvertiseTicketPage;

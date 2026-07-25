@@ -5,27 +5,45 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
+const NavLink = ({ href, icon, children, pathname }) => {
+  const isActive = pathname === href;
+
+  return (
+    <Link
+      href={href}
+      className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
+        isActive
+          ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
+          : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
+      }`}
+    >
+      <span>{icon}</span>
+      {children}
+    </Link>
+  );
+};
+
 const Sidebar = () => {
   const pathname = usePathname();
 
   return (
     <aside className="hidden md:flex flex-col w-64 h-full shrink-0 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
       <div className="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-bold text-xl text-foreground hover:opacity-90"
-          >
-            <Image
-              src="/images/logo/logo-bg.png"
-              alt="TicketBari Logo"
-              width={36}
-              height={36}
-              className="object-contain rounded-full h-auto"
-            />
-            <span className="bg-linear-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
-              TicketBari
-            </span>
-          </Link>
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-bold text-xl text-foreground hover:opacity-90"
+        >
+          <Image
+            src="/images/logo/logo-bg.png"
+            alt="TicketBari Logo"
+            width={36}
+            height={36}
+            className="object-contain rounded-full h-auto"
+          />
+          <span className="bg-gradient-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
+            TicketBari
+          </span>
+        </Link>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-1">
@@ -33,50 +51,64 @@ const Sidebar = () => {
           Discover
         </p>
 
-        <Link
-          href="/dashboard/mybookings"
-          className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
-            pathname === "/dashboard/mybookings"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
-              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
-          }`}
-        >
-          <span>🗺️</span> My Bookings
-        </Link>
-        <Link
-          href="/dashboard/profile"
-          className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
-            pathname === "/dashboard/profile"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
-              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
-          }`}
-        >
-          <span>👤</span> My Profile
-        </Link>
+        <NavLink href="/dashboard/mybookings" icon="🗺️" pathname={pathname}>
+          My Bookings
+        </NavLink>
 
-        <Link
-          href="/dashboard/addticket"
-          className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
-            pathname === "/dashboard/addticket"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
-              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
-          }`}
-        >
-          <span>➕</span> Add Tickets
-        </Link>
+        <NavLink href="/dashboard/profile" icon="👤" pathname={pathname}>
+          My Profile
+        </NavLink>
 
-        <Link
-          href="/dashboard/manageticket"
-          className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
-            pathname === "/dashboard/manageticket"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
-              : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
-          }`}
+        <NavLink
+          href="/dashboard/transaction-history"
+          icon="💳"
+          pathname={pathname}
         >
-          <span>🎫</span> Manage Ticket
-        </Link>
+          My Transaction
+        </NavLink>
+
+        <NavLink href="/dashboard/addticket" icon="🆕" pathname={pathname}>
+          Add Tickets
+        </NavLink>
+
+        <NavLink href="/dashboard/addedtickets" icon="➕" pathname={pathname}>
+          Added Tickets
+        </NavLink>
+
+        <NavLink
+          href="/dashboard/requestedbookings"
+          icon="📋"
+          pathname={pathname}
+        >
+          Requested Bookings
+        </NavLink>
+
+        <NavLink
+          href="/dashboard/revenue-overview"
+          icon="📈"
+          pathname={pathname}
+        >
+          Revenue Overview
+        </NavLink>
+
+        <NavLink href="/dashboard/manageuser" icon="🧑‍💻" pathname={pathname}>
+          Manage User
+        </NavLink>
+
+        <NavLink href="/dashboard/manageticket" icon="📊" pathname={pathname}>
+          Manage Ticket
+        </NavLink>
+
+        <NavLink
+          href="/dashboard/advertise-tickets"
+          icon="🎫"
+          pathname={pathname}
+        >
+          Advertise Tickets
+        </NavLink>
       </div>
 
+      {/* User Footer Profile */}
       <div className="p-4 border-t border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-3 px-2 py-1.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors cursor-pointer">
           <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0">

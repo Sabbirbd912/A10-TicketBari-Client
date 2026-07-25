@@ -1,14 +1,20 @@
 import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
 import { Button, Table } from "@heroui/react";
+import Link from "next/link";
 
-const TransactionHistoryPage =async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
+const RequestedBookings = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
   const alltickets = data;
+
+  // console.log(alltickets)
+
   return (
     <div>
-      <h1 className="mb-5 font-semibold tracking-wide">Transaction Details</h1>
+      <h1 className="mb-5 font-semibold tracking-wide">
+        Available Requested Booking
+      </h1>
       <Table>
         <Table.ScrollContainer>
           <Table.Content aria-label="Team members" className="min-w-150">
@@ -64,4 +70,4 @@ const TransactionHistoryPage =async () => {
   );
 };
 
-export default TransactionHistoryPage;
+export default RequestedBookings;

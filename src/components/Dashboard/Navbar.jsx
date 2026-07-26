@@ -2,16 +2,23 @@ import { ThemeSwitch } from "../ThemeToggle";
 import { signOut, useSession } from "@/lib/auth-client";
 import { Button, Dropdown, Label, Avatar } from "@heroui/react";
 import { toast } from "react-toastify";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = ({ onMobileMenuToggle }) => {
   const { data, isPending } = useSession();
   const user = data?.user;
+  const router = useRouter();
 
-  const logOut = () => {
-    signOut();
-    toast.success("You are logged out!");
+  const logOut = async () => {
+    await signOut();
+    toast.success("Logged out successfully!");
+    router.replace("/login");
   };
+
+  // const logOut = () => {
+  //   signOut();
+  //   toast.success("You are logged out!");
+  // };
 
   return (
     <header className="sticky top-0 z-40 h-16 w-full flex items-center justify-between px-4 sm:px-6 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 shrink-0">

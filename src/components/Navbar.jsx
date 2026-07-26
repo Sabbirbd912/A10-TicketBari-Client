@@ -8,17 +8,23 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { ThemeSwitch } from "./ThemeToggle";
 import MyNavLink from "./MyNavLink";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   const { data, isPending } = useSession();
   const user = data?.user;
 
-  const logOut = () => {
-    signOut();
+  const router = useRouter();
+
+  const logOut = async () => {
+    const result = await signOut();
+    console.log("Sign out result:", result);
+
     toast.success("You are logged out!");
+
+    router.refresh();
   };
 
   const navItems = (

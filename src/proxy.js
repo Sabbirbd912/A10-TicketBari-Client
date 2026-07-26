@@ -16,5 +16,5 @@ export async function proxy(request) {
 }
 
 export const config = {
-    matcher: ['/dashboard', '/dashboard/mybookings', '/dashboard/profile', '/dashboard/addticket', '/dashboard/manageticket', '/managefacility/:path'],
+    matcher: ['/dashboard', '/dashboard/mybookings', '/dashboard/profile', '/dashboard/addticket', '/dashboard/manageticket', '/dashboard/addedtickets', '/dashboard/editticket/:path'],
 }

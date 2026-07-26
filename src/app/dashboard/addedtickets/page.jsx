@@ -1,11 +1,25 @@
 
 import BookedCard from "@/components/Dashboard/BookedCard";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const MyAddedTickets = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
+
+  const session = await auth.api.getSession({
+    headers: await headers() // you need to pass the headers object.
+  });
+
+  const user = session?.user;
+
+  console.log(user.email)
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets?email=${user.email}`);
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
   const addedtickets = data;
+
+  console.log(addedtickets)
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
       <h2 className="text-3xl text-center font-bold mb-8">My Added Tickets Here </h2>

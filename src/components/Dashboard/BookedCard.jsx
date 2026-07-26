@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteButton from "./DeleteButton";
 
 
-const BookedCard = ({ticket}) => {
+const BookedCard = ({ ticket }) => {
   return (
     <div className="w-full max-w-sm mx-auto h-full flex flex-col animate-fade-in-up">
       <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 flex flex-col flex-1 select-none border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out group">
@@ -19,7 +20,7 @@ const BookedCard = ({ticket}) => {
             className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-500 ease-out"
             priority={false}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 via-transparent to-transparent" />
           <div className="absolute top-3 left-3 z-10">
             <span className="bg-slate-900/80 backdrop-blur-md text-lime-400 border border-lime-400/30 font-bold text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
               🚌 Bus
@@ -54,8 +55,8 @@ const BookedCard = ({ticket}) => {
         </div>
 
         <div className="relative w-full h-4 bg-transparent flex items-center shrink-0 my-1">
-          <div className="absolute -left-[23px] w-4 h-4 rounded-full bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-transparent shadow-inner" />
-          <div className="absolute -right-[23px] w-4 h-4 rounded-full bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-transparent shadow-inner" />
+          <div className="absolute -left-5.75 w-4 h-4 rounded-full bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-transparent shadow-inner" />
+          <div className="absolute -right-5.75 w-4 h-4 rounded-full bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-transparent shadow-inner" />
           <div className="w-full border-t border-dashed border-slate-200 dark:border-slate-700/80" />
         </div>
 
@@ -81,27 +82,12 @@ const BookedCard = ({ticket}) => {
               </span>
             </div>
           </div>
-
-          <Link
-            href={`/alltickets/${ticket._id}`}
-            className="w-full bg-slate-900 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-lime-400 text-white dark:text-slate-200 hover:text-white dark:hover:text-slate-950 font-bold text-xs py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 shadow-sm active:scale-[0.98]"
-          >
-            See Details
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2.5"
-              stroke="currentColor"
-              className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </Link>
+          <div className="flex gap-5">
+            <Link href={`/alltickets/update/${ticket._id}`} className="w-md bg-slate-900 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-lime-400 text-white dark:text-slate-200 hover:text-white dark:hover:text-slate-950 font-bold text-xs py-2.5 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 shadow-sm active:scale-[0.98]"  >
+              Update
+            </Link>
+            <DeleteButton deleteData={ticket} endpoint={'deleteticket'} ></DeleteButton>
+          </div>
         </div>
       </div>
     </div>

@@ -2,9 +2,9 @@
 
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Check, ArrowLeft } from "@gravity-ui/icons";
+import { Check, ArrowLeft, Eye, EyeClosed } from "@gravity-ui/icons";
 import {
   Button,
   Card,
@@ -18,8 +18,11 @@ import { GrGoogle } from "react-icons/gr";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
+
 export default function LoginPage() {
   const router = useRouter();
+
+  const [passToggle, setPassToggle] = useState(true);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -131,12 +134,18 @@ export default function LoginPage() {
                 Forgot password?
               </Link>
             </div>
-            <Input
-              placeholder="Enter your password"
-              className="mt-1"
-              variant="bordered"
-              radius="md"
-            />
+            <div className="w-full relative">
+              <Input
+                placeholder="Enter your password"
+                className="mt-1 w-full"
+                variant="bordered"
+                radius="md"
+                type={passToggle? 'password' : 'text'}
+              />
+              <Button onClick={() => setPassToggle(!passToggle)} isIconOnly variant="secondary" className="absolute right-1 bg-transparent">
+                {passToggle ? <EyeClosed></EyeClosed> : <Eye></Eye>}
+              </Button>
+            </div>
             <FieldError className="text-xs text-danger mt-1" />
           </TextField>
 

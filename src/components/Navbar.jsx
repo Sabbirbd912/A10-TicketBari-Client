@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   const { data, isPending } = useSession();
   const user = data?.user;
 

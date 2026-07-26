@@ -1,3 +1,4 @@
+import DeleteButton from "@/components/Dashboard/DeleteButton";
 import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
 import { Button, Table } from "@heroui/react";
 import Link from "next/link";
@@ -44,15 +45,8 @@ const ManageTicketPage = async () => {
                 <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-3">
-                    <Button isIconOnly variant="secondary">
-                      <PencilToSquare />
-                    </Button>
-                    <Button isIconOnly variant="secondary">
-                      <FileText />
-                    </Button>
-                    <Button isIconOnly variant="danger">
-                      <TrashBin />
-                    </Button>
+                    <Button className="bg-[#daf7e9] text-[#009966]" >Accept</Button>
+                    <DeleteButton deleteData={ticket} endpoint={'deleteticket'} text={'Reject'} ></DeleteButton>
                   </div>
                 </Table.Cell>
               </Table.Row> )

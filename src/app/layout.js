@@ -18,11 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`h-full antialiased ${poppins.className}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`h-full antialiased ${poppins.className}`} suppressHydrationWarning >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <NextThemeProvider>
           <Navbar />

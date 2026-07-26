@@ -1,7 +1,18 @@
 import { ThemeSwitch } from "../ThemeToggle";
-
+import { signOut, useSession } from "@/lib/auth-client";
+import { Button, Dropdown, Label, Avatar } from "@heroui/react";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
 const Navbar = ({ onMobileMenuToggle }) => {
+  const { data, isPending } = useSession();
+  const user = data?.user;
+
+  const logOut = () => {
+    signOut();
+    toast.success("You are logged out!");
+  };
+
   return (
     <header className="sticky top-0 z-40 h-16 w-full flex items-center justify-between px-4 sm:px-6 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 shrink-0">
       <div className="flex items-center gap-3">
@@ -34,12 +45,81 @@ const Navbar = ({ onMobileMenuToggle }) => {
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 hover:scale-95 transition-transform flex items-center justify-center text-sm">
-          🔔
-        </button>
-        
+        {isPending ? (
+          <div className="flex items-center justify-center w-8 h-8">
+            <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></span>
+          </div>
+        ) : user ? (
+          <Dropdown>
+            <Button
+              aria-label="User menu"
+              variant="light"
+              className="flex items-center gap-2 h-auto py-1.5 px-2.5 rounded-full hover:bg-default-100"
+            >
+              <Avatar>
+                <Avatar.Image src={user?.image} alt={user?.name} />
+                <Avatar.Fallback>
+                  {user?.name
+                    ? user.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                    : "U"}
+                </Avatar.Fallback>
+              </Avatar>
+
+              <span className="hidden sm:block text-sm font-medium text-default-700">
+                {user?.name.split(" ")[0]}
+              </span>
+            </Button>
+
+            <Dropdown.Popover className="bg-background border border-divider shadow-xl rounded-xl min-w-50">
+              <Dropdown.Menu
+                onAction={(key) => console.log(`Selected: ${key}`)}
+              >
+                <Dropdown.Item
+                  key="username"
+                  textValue="User Name"
+                  className="border border-[#00BC7D] rounded-xl"
+                >
+                  <Label className="cursor-pointer font-medium text-sm text-[#00BC7D] ">
+                    {user?.name}
+                  </Label>
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  key="logout"
+                  textValue="Log Out"
+                  variant="danger"
+                >
+                  <button
+                    onClick={logOut}
+                    className="flex items-center gap-2 w-full text-danger py-1 cursor-pointer"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      />
+                    </svg>
+                    <Label className="cursor-pointer font-medium text-sm">
+                      Log Out
+                    </Label>
+                  </button>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown.Popover>
+          </Dropdown>
+        ) : null}
         <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 hover:scale-95 transition-transform text-sm">
-          <ThemeSwitch/>
+          <ThemeSwitch />
         </div>
       </div>
     </header>

@@ -23,7 +23,7 @@ const BookedCard = ({ ticket }) => {
           <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 via-transparent to-transparent" />
           <div className="absolute top-3 left-3 z-10">
             <span className="bg-slate-900/80 backdrop-blur-md text-lime-400 border border-lime-400/30 font-bold text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
-             {ticket.transport_type}
+              {ticket.transport_type}
             </span>
           </div>
         </div>

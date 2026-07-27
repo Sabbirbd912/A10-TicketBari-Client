@@ -18,7 +18,6 @@ import { GrGoogle } from "react-icons/gr";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-
 export default function LoginPage() {
   const router = useRouter();
 

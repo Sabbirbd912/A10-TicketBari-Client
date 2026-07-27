@@ -109,9 +109,9 @@ const AllTicketPage = () => {
   }
 
   return (
-    <div className="w-w mx-auto my-1 font-sans">
+    <div className="w-[80%] mx-auto my-1 font-sans">
 
-      <h1 className="mb-5 font-bold text-neutral-600 dark:text-white text-3xl tracking-wide">Add New Ticket</h1>
+      <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">Add New Ticket</h1>
 
       {/* FORM CONTAINER CARD (Matches Table Container in Dashboard) */}
       <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-sm">
@@ -354,7 +354,7 @@ const AllTicketPage = () => {
           {/* 7. Submit Action Button */}
           <div className="pt-4">
 
-            <button type="submit" className="w-full bg-linear-to-r from-[#00a877] to-[#0a3629] text-white font-bold text-sm py-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-[0.99] transition-all cursor-pointer"  >
+            <button type="submit" className="w-full bg-linear-to-r from-[#00a877] to-[#0a3629] text-white font-bold text-sm py-4 rounded-full flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-[0.99] transition-all cursor-pointer"  >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5" >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>

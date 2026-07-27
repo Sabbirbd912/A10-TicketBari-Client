@@ -16,7 +16,7 @@ const LatestTicket = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/populartickets")
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`)
       .then((res) => res.json())
       .then((data) => {
         setLatestTickets(data.slice(0, 6));

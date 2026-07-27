@@ -1,9 +1,11 @@
+import ApproveButton from "@/components/Dashboard/ApproveButton";
 import DeleteButton from "@/components/Dashboard/DeleteButton";
 import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
-import { Button, Table } from "@heroui/react";
+import { Button, Chip, Table } from "@heroui/react";
 import Link from "next/link";
 
 const ManageTicketPage = async () => {
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
@@ -13,12 +15,11 @@ const ManageTicketPage = async () => {
 
   return (
     <div>
-      <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">
-        Available Tickets
-      </h1>
+      <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">Manage Tickets</h1>
       <Table>
         <Table.ScrollContainer>
           <Table.Content aria-label="Team members" className="min-w-150">
+
             <Table.Header>
               <Table.Column isRowHeader>#</Table.Column>
               <Table.Column>Photo</Table.Column>
@@ -32,36 +33,27 @@ const ManageTicketPage = async () => {
             </Table.Header>
 
             <Table.Body>
-              {alltickets.map((ticket, i) => (
-                <Table.Row key={i}>
-                  <Table.Cell> {i + 1} </Table.Cell>
-                  <Table.Cell>
-                    {" "}
-                    <div
-                      className="w-12 h-12 bg-cover rounded-sm p-1"
-                      style={{ backgroundImage: `url(${ticket.image_url})` }}
-                    ></div>{" "}
-                  </Table.Cell>
-                  <Table.Cell> {ticket.ticket_title} </Table.Cell>
-                  <Table.Cell> {ticket.from_location} </Table.Cell>
-                  <Table.Cell> {ticket.to_location} </Table.Cell>
-                  <Table.Cell> {ticket.transport_type} </Table.Cell>
-                  <Table.Cell> {ticket.price} </Table.Cell>
-                  <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
-                  <Table.Cell>
-                    <div className="flex gap-3">
-                      <Button className="bg-[#daf7e9] text-[#009966]">
-                        Accept
-                      </Button>
-                      <DeleteButton
-                        deleteData={ticket}
-                        endpoint={"deleteticket"}
-                        text={"Reject"}
-                      ></DeleteButton>
-                    </div>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
+
+              {
+                alltickets.map((ticket,i) => <Table.Row key={i}>
+                <Table.Cell> {i+1} </Table.Cell>
+                <Table.Cell> <div className='w-12 h-12 bg-cover rounded-sm p-1' style={{ backgroundImage: `url(${ticket.image_url})` }}></div> </Table.Cell>
+                <Table.Cell> {ticket.ticket_title} </Table.Cell>
+                <Table.Cell> {ticket.from_location} </Table.Cell>
+                <Table.Cell> {ticket.to_location} </Table.Cell>
+                <Table.Cell> {ticket.transport_type} </Table.Cell>
+                <Table.Cell> {ticket.price} </Table.Cell>
+                <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
+                <Table.Cell>
+                  <div className="flex gap-3">
+                    {ticket.status == 'approved'? <Chip color="success" className="w-22.5">Approved</Chip> : <ApproveButton id={ticket._id} ></ApproveButton>}
+                    {ticket.status == 'approved'? <DeleteButton deleteData={ticket} endpoint={'deleteticket'} text={'Delete'} ></DeleteButton> : <DeleteButton deleteData={ticket} endpoint={'deleteticket'} text={'Reject'} ></DeleteButton>}
+                  </div>
+                </Table.Cell>
+              </Table.Row> )
+              }
+              
+
             </Table.Body>
           </Table.Content>
         </Table.ScrollContainer>

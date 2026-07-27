@@ -36,7 +36,6 @@ const ProfilePage = () => {
       </div>
     );
   }
-
   return (
     <div className="max-w-2xl mx-auto my-12 px-4">
       <Card className="p-8 md:p-10 shadow-md border border-default-100">
@@ -51,11 +50,12 @@ const ProfilePage = () => {
             <Avatar.Fallback>{user?.name?.charAt(0) || "U"}</Avatar.Fallback>
           </Avatar>
 
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-foreground">
-              {user?.name || "User"}
+          <div className="space-y-3">
+            <p className="bg-emerald-40 text-base text-default-700 px-3 py-2.5 rounded-md uppercase tracking-wider shadow-sm"> Role: {user?.role}</p>
+            <h1 className="text-2xl font-bold text-foreground">
+              Name: {user?.name || "User"}
             </h1>
-            <p className="text-base text-default-500">{user?.email}</p>
+            <p className="text-base text-default-500"> Email: {user?.email}</p>
           </div>
 
           <div className="pt-2">

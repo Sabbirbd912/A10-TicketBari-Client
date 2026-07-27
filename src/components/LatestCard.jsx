@@ -5,6 +5,8 @@ import Link from "next/link";
 const LatestCard = ({ ticket }) => {
   if (!ticket) return null;
 
+  console.log(ticket);
+
   return (
     <div className="w-full max-w-sm mx-auto h-full flex flex-col animate-fade-in-up">
       <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 flex flex-col flex-1 select-none border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 ease-out group">
@@ -23,15 +25,17 @@ const LatestCard = ({ ticket }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
           <div className="absolute top-3 left-3 z-10">
             <span className="bg-slate-900/80 backdrop-blur-md text-lime-400 border border-lime-400/30 font-bold text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
-              🚌 Bus
+            {ticket.transport_type}
             </span>
           </div>
         </div>
 
         <div className="flex flex-1 flex-col justify-between pt-4 pb-2 space-y-4">
           <div className="flex-1">
-            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-snug group-hover:text-emerald-500 dark:group-hover:text-lime-400 transition-colors line-clamp-2">
-              {ticket.ticket_title}
+            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-snug group-hover:text-emerald-500 dark:group-hover:text-lime-400 transition-colors">
+              {ticket.ticket_title.length > 20
+                ? `${ticket.ticket_title.slice(0, 20)}...`
+                : ticket.ticket_title}
             </h3>
           </div>
 

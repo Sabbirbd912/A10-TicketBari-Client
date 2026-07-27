@@ -8,7 +8,7 @@ const TransactionHistoryPage =async () => {
   const alltickets = data;
   return (
     <div>
-      <h1 className="mb-5 font-semibold tracking-wide">Transaction Details</h1>
+      <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">Transaction Details</h1>
       <Table>
         <Table.ScrollContainer>
           <Table.Content aria-label="Team members" className="min-w-150">

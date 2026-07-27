@@ -24,7 +24,7 @@ const TicketCards = ({ ticket }) => {
 
           <div className="absolute top-4 left-4 z-10">
             <span className="bg-lime-400 text-slate-950 font-black text-[11px] px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
-              🚌 Bus
+              {ticket.transport_type}
             </span>
           </div>
         </div>

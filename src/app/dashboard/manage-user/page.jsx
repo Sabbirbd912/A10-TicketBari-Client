@@ -13,7 +13,7 @@ const ManageUserPage = async () => {
 
   return (
     <div>
-      <h1 className="mb-5 font-semibold tracking-wide">Manage Your User</h1>
+      <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">Manage Your User</h1>
       <Table>
         <Table.ScrollContainer>
           <Table.Content aria-label="Team members" className="min-w-150">

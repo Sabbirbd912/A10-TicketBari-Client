@@ -40,7 +40,7 @@ const Sidebar = () => {
             height={36}
             className="object-contain rounded-full h-auto"
           />
-          <span className="bg-gradient-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-500 to-green-600 bg-clip-text text-transparent">
             TicketBari
           </span>
         </Link>
@@ -91,7 +91,7 @@ const Sidebar = () => {
           Revenue Overview
         </NavLink>
 
-        <NavLink href="/dashboard/manageuser" icon="🧑‍💻" pathname={pathname}>
+        <NavLink href="/dashboard/manage-user" icon="🧑" pathname={pathname}>
           Manage User
         </NavLink>
 

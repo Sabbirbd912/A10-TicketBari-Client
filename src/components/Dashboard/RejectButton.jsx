@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import Swal from 'sweetalert2';
 
-const ApproveButton = ({ id, endpoint }) => {
+const RejectButton = ({ id, endpoint }) => {
 
     const router = useRouter();
 
-    const handleApprove = async () => {
+    const handleReject = async () => {
 
         try {
             const res = await fetch(
@@ -20,12 +20,14 @@ const ApproveButton = ({ id, endpoint }) => {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        status: 'approved',
+                        status: 'rejected',
                     }),
                 }
             );
 
             const data = await res.json();
+
+            console.log(data)
 
             if (data.modifiedCount > 0) {
                 console.log("Status updated successfully");
@@ -33,7 +35,7 @@ const ApproveButton = ({ id, endpoint }) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Ticket has been approved!",
+                    title: "Ticket has been rejected!",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -49,11 +51,12 @@ const ApproveButton = ({ id, endpoint }) => {
 
     }
 
+
     return (
         <div>
-            <Button onClick={handleApprove} className="bg-[#daf7e9] text-[#009966]" >Approve</Button>
+            <Button onClick={handleReject} variant="danger-soft" >Reject</Button>
         </div>
     );
 };
 
-export default ApproveButton;
+export default RejectButton;

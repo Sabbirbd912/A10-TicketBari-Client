@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const Countdown = ({ departureDate }) => {
+const Countdown = ({ departureDate, small = false }) => {
     const calculateTimeLeft = () => {
         const difference = new Date(departureDate).getTime() - Date.now();
 
@@ -41,8 +41,8 @@ const Countdown = ({ departureDate }) => {
 
     return (
         <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className={`flex flex-col ${small ? "gap-1 text-sm" : ""}`}>
+                <span className={`countdown font-mono ${small ? "text-xl" : "text-5xl"}`}>
                     <span
                         style={{ "--value": timeLeft.days }}
                         aria-label={`${timeLeft.days} days`}
@@ -53,8 +53,8 @@ const Countdown = ({ departureDate }) => {
                 days
             </div>
 
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className={`flex flex-col ${small ? "gap-1 text-sm" : ""}`}>
+                <span className={`countdown font-mono ${small ? "text-xl" : "text-5xl"}`}>
                     <span
                         style={{ "--value": timeLeft.hours }}
                         aria-label={`${timeLeft.hours} hours`}
@@ -65,8 +65,8 @@ const Countdown = ({ departureDate }) => {
                 hours
             </div>
 
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className={`flex flex-col ${small ? "gap-1 text-sm" : ""}`}>
+                <span className={`countdown font-mono ${small ? "text-xl" : "text-5xl"}`}>
                     <span
                         style={{ "--value": timeLeft.minutes }}
                         aria-label={`${timeLeft.minutes} minutes`}
@@ -77,8 +77,8 @@ const Countdown = ({ departureDate }) => {
                 min
             </div>
 
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className={`flex flex-col ${small ? "gap-1 text-sm" : ""}`}>
+                <span className={`countdown font-mono ${small ? "text-xl" : "text-5xl"}`}>
                     <span
                         style={{ "--value": timeLeft.seconds }}
                         aria-label={`${timeLeft.seconds} seconds`}

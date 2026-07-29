@@ -1,9 +1,23 @@
+import ApproveButton from "@/components/Dashboard/ApproveButton";
+import DeleteButton from "@/components/Dashboard/DeleteButton";
+import RejectButton from "@/components/Dashboard/RejectButton";
+import { auth } from "@/lib/auth";
 import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
-import { Button, Table } from "@heroui/react";
+import { Button, Chip, Table } from "@heroui/react";
+import { headers } from "next/headers";
 import Link from "next/link";
 
 const RequestedBookings = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
+
+  const session = await auth.api.getSession({
+    headers: await headers() // you need to pass the headers object.
+  });
+
+  const user = session?.user;
+
+  console.log(user.email)
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings?vendor_email=${user.email}`);
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
   const alltickets = data;
@@ -24,7 +38,7 @@ const RequestedBookings = async () => {
               <Table.Column>Name</Table.Column>
               <Table.Column>From</Table.Column>
               <Table.Column>To</Table.Column>
-              <Table.Column>Transport Type</Table.Column>
+              <Table.Column>User Email</Table.Column>
               <Table.Column>Price</Table.Column>
               <Table.Column>Quantity</Table.Column>
               <Table.Column>Action</Table.Column>
@@ -44,20 +58,29 @@ const RequestedBookings = async () => {
                   <Table.Cell> {ticket.ticket_title} </Table.Cell>
                   <Table.Cell> {ticket.from_location} </Table.Cell>
                   <Table.Cell> {ticket.to_location} </Table.Cell>
-                  <Table.Cell> {ticket.transport_type} </Table.Cell>
-                  <Table.Cell> {ticket.price} </Table.Cell>
-                  <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
+                  <Table.Cell> {ticket.user_email} </Table.Cell>
+                  <Table.Cell> {ticket.total_price} </Table.Cell>
+                  <Table.Cell> {ticket.booking_quantity} </Table.Cell>
                   <Table.Cell>
                     <div className="flex gap-3">
-                      <Button isIconOnly variant="secondary">
-                        <PencilToSquare />
-                      </Button>
-                      <Button isIconOnly variant="secondary">
-                        <FileText />
-                      </Button>
-                      <Button isIconOnly variant="danger">
-                        <TrashBin />
-                      </Button>
+                      {/* {ticket.status == 'approved' ? <Chip color="success" className="w-22.5">Approved</Chip> : <ApproveButton id={ticket._id} endpoint={'booking'} ></ApproveButton>} */}
+
+                      <div className="flex gap-3">
+                        {
+                          ticket.status === "approved" ? (
+                            <Chip color="success" className="w-22.5">
+                              Approved
+                            </Chip>
+                          ) : ticket.status === "rejected" ? (
+                            <Chip color="danger" className="w-22.5">
+                              Rejected
+                            </Chip>
+                          ) : (
+                            <ApproveButton id={ticket._id} endpoint="booking" />
+                          )
+                        }
+                        {ticket.status == 'pending' ? <RejectButton id={ticket._id} endpoint={'booking'}></RejectButton> : <DeleteButton deleteData={ticket} endpoint={'deletebooking'} text={'Delete'} ></DeleteButton>}
+                      </div>
                     </div>
                   </Table.Cell>
                 </Table.Row>

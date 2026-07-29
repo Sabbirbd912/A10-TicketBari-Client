@@ -1,5 +1,6 @@
 import ApproveButton from "@/components/Dashboard/ApproveButton";
 import DeleteButton from "@/components/Dashboard/DeleteButton";
+import RejectButton from "@/components/Dashboard/RejectButton";
 import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
 import { Button, Chip, Table } from "@heroui/react";
 import Link from "next/link";
@@ -35,24 +36,36 @@ const ManageTicketPage = async () => {
             <Table.Body>
 
               {
-                alltickets.map((ticket,i) => <Table.Row key={i}>
-                <Table.Cell> {i+1} </Table.Cell>
-                <Table.Cell> <div className='w-12 h-12 bg-cover rounded-sm p-1' style={{ backgroundImage: `url(${ticket.image_url})` }}></div> </Table.Cell>
-                <Table.Cell> {ticket.ticket_title} </Table.Cell>
-                <Table.Cell> {ticket.from_location} </Table.Cell>
-                <Table.Cell> {ticket.to_location} </Table.Cell>
-                <Table.Cell> {ticket.transport_type} </Table.Cell>
-                <Table.Cell> {ticket.price} </Table.Cell>
-                <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
-                <Table.Cell>
-                  <div className="flex gap-3">
-                    {ticket.status == 'approved'? <Chip color="success" className="w-22.5">Approved</Chip> : <ApproveButton id={ticket._id} ></ApproveButton>}
-                    {ticket.status == 'approved'? <DeleteButton deleteData={ticket} endpoint={'deleteticket'} text={'Delete'} ></DeleteButton> : <DeleteButton deleteData={ticket} endpoint={'deleteticket'} text={'Reject'} ></DeleteButton>}
-                  </div>
-                </Table.Cell>
-              </Table.Row> )
+                alltickets.map((ticket, i) => <Table.Row key={i}>
+                  <Table.Cell> {i + 1} </Table.Cell>
+                  <Table.Cell> <div className='w-12 h-12 bg-cover rounded-sm p-1' style={{ backgroundImage: `url(${ticket.image_url})` }}></div> </Table.Cell>
+                  <Table.Cell> {ticket.ticket_title} </Table.Cell>
+                  <Table.Cell> {ticket.from_location} </Table.Cell>
+                  <Table.Cell> {ticket.to_location} </Table.Cell>
+                  <Table.Cell> {ticket.transport_type} </Table.Cell>
+                  <Table.Cell> {ticket.price} </Table.Cell>
+                  <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
+                  <Table.Cell>
+                    <div className="flex gap-3">
+                      {
+                        ticket.status === "approved" ? (
+                          <Chip color="success" className="w-22.5">
+                            Approved
+                          </Chip>
+                        ) : ticket.status === "rejected" ? (
+                          <Chip color="danger" className="w-22.5">
+                            Rejected
+                          </Chip>
+                        ) : (
+                          <ApproveButton id={ticket._id} endpoint="tickets" />
+                        )
+                      }
+                      {ticket.status == 'pending' ? <RejectButton id={ticket._id} endpoint={'tickets'}></RejectButton> : <DeleteButton deleteData={ticket} endpoint={'deleteticket'} text={'Delete'} ></DeleteButton>}
+                    </div>
+                  </Table.Cell>
+                </Table.Row>)
               }
-              
+
 
             </Table.Body>
           </Table.Content>

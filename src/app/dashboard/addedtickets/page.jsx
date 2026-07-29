@@ -1,4 +1,5 @@
 
+import AddedCard from "@/components/Dashboard/AddedCard";
 import BookedCard from "@/components/Dashboard/BookedCard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -25,7 +26,8 @@ const MyAddedTickets = async () => {
       <h2 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">My Added Tickets Here </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         {addedtickets.map((ticket) => (
-          <BookedCard key={ticket._id} ticket={ticket} />
+          <AddedCard key={ticket._id} ticket={ticket} />
+          // <BookedCard key={ticket._id} ticket={ticket} />
         ))}
       </div>
     </div>

@@ -53,7 +53,7 @@ const TicketDetailPage = async ({ params }) => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-12">
+    <div className="w-full max-w-5xl mx-auto px-4 py-5">
       <Link
         href="/alltickets"
         className="text-sm font-bold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 flex items-center gap-2 mb-6 transition-colors"

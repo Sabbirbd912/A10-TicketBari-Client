@@ -30,10 +30,8 @@ const LatestCard = ({ ticket }) => {
 
         <div className="flex flex-1 flex-col justify-between pt-4 pb-2 space-y-4">
           <div className="flex-1">
-            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-snug group-hover:text-emerald-500 dark:group-hover:text-lime-400 transition-colors">
-              {ticket.ticket_title.length > 20
-                ? `${ticket.ticket_title.slice(0, 20)}...`
-                : ticket.ticket_title}
+            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-snug group-hover:text-emerald-500 dark:group-hover:text-lime-400 transition-colors line-clamp-2">
+              {ticket.ticket_title}
             </h3>
           </div>
 

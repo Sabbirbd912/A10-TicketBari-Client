@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 import Countdown from "../Countdown";
+import { Chip } from "@heroui/react";
 
 
 const BookedCard = ({ bookedData }) => {
@@ -12,7 +13,7 @@ const BookedCard = ({ bookedData }) => {
 
   const hasDeparturePassed = departureTime <= now;
 
-  const isPaymentDisabled = hasDeparturePassed || bookedData.booking_status == 'pending';
+  const isPaymentDisabled = hasDeparturePassed || bookedData.status == 'pending';
 
   // Format the ISO date string into something human-readable
   const formattedDate = new Date(bookedData.departure_date_time).toLocaleString(
@@ -162,19 +163,31 @@ const BookedCard = ({ bookedData }) => {
           </div>
 
           <div className="flex gap-5">
-            <button disabled={isPaymentDisabled} className="w-full  bg-emerald-600 hover:bg-emerald-500 text-white font-black px-6 py-3.5 rounded-xl transition-all shadow-md active:scale-95 text-sm disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70" >
-              Pay Now
-              {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform"            >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg> */}
-            </button>
 
-            {/* <Link href={`/dashboard/editbookedData/${bookedData._id}`} className="w-full bg-slate-900 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-lime-400 text-white dark:text-slate-200 hover:text-white dark:hover:text-slate-950 font-bold text-xs py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-200 shadow-sm active:scale-[0.98]"  >
-              Pay Now
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform"            >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-            </Link> */}
+            {bookedData.status === "paid" ? (
+              <Chip color="success" className="w-full justify-center">
+                Paid
+              </Chip>
+            ) : (
+              <form action="/api/checkout_sessions" method="POST">
+                <section>
+                  <input readOnly type="hidden" value={bookedData.total_price} name="price" />
+                  <input readOnly type="hidden" value={bookedData.ticket_title} name="ticket_title" />
+                  <input readOnly type="hidden" value={bookedData.ticket_id} name="ticket_id" />
+                  <input readOnly type="hidden" value={bookedData._id} name="booking_id" />
+                  <input readOnly type="hidden" value={bookedData.booking_quantity} name="booking_quantity" />
+
+                  <button
+                    type="submit"
+                    role="link"
+                    disabled={isPaymentDisabled}
+                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black px-6 py-3.5 rounded-xl transition-all shadow-md active:scale-95 text-sm disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    Pay Now
+                  </button>
+                </section>
+              </form>
+            )}
 
           </div>
 

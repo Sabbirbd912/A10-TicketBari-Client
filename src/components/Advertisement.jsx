@@ -4,6 +4,7 @@ const Advertisement =async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/populartickets`);
     const data = await res.json();
     // const popularTickets=data.slice(0,6);
+    console.log(data);
 
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-12">

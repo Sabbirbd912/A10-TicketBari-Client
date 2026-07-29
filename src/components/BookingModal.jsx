@@ -53,7 +53,7 @@ export default function BookingModal({ ticket }) {
       departure_date_time: ticket.departure_date_time,
       vendor_email: ticket.vendor_email,
       user_email: user.email,
-      booking_status: 'pending',
+      status: 'pending',
       created_at: new Date()
     };
 

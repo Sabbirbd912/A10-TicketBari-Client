@@ -42,7 +42,7 @@ export default function AboutDiscover() {
         </div>
 
         <div className="lg:col-span-4 flex flex-col text-center lg:text-left items-center lg:items-start">
-          <span className="font-serif italic text-xl md:text-2xl text-lime-500 dark:text-sky-400 mb-2 select-none">
+          <span className="font-serif italic text-xl md:text-2xl text-sky-500 dark:text-sky-400 mb-2 select-none">
             About Discover
           </span>
 
@@ -103,7 +103,7 @@ export default function AboutDiscover() {
             </div>
             <div className="h-[140px] bg-gradient-to-r from-emerald-600 to-emerald-500 dark:from-emerald-500 dark:to-emerald-400 p-6 flex flex-col items-center justify-center text-center shadow-[inset_0_2px_10px_rgba(255,255,255,0.15)]">
               <span className="text-white text-4xl font-extrabold tracking-tight">
-                27+
+                39+
               </span>
               <span className="text-emerald-100 dark:text-emerald-50 font-bold text-xs uppercase tracking-widest mt-1">
                 Year Experience

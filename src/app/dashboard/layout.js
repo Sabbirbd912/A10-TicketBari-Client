@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
         <Navbar onMobileMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)} />
 
         <main className="flex-1 overflow-y-auto overflow-x-hidden bg-slate-50/50 dark:bg-slate-950/20">
-          <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 min-h-full">
+          <div className="max-w-7xl mx-auto p-0 sm:p-3 lg:p-5 min-h-full">
             {children}
           </div>
         </main>

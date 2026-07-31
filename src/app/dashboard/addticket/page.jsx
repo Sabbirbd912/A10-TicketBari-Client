@@ -57,7 +57,7 @@ const AllTicketPage = () => {
 
     // Read all normal values
     const ticketData = {
-      verification_status: "pending",
+      status: "pending",
       ticket_title,
       from_location,
       to_location,
@@ -68,7 +68,7 @@ const AllTicketPage = () => {
       image_url,
       vendor_name: user.name,
       vendor_email: user.email,
-      isAdvertise: "false",
+      isAdvertise: false,
       created_at: new Date()
     };
 
@@ -95,7 +95,7 @@ const AllTicketPage = () => {
         timer: 1000
       });
 
-      router.push("/addedtickets");
+      router.push("/dashboad/addedtickets");
     }
 
     e.target.reset();
@@ -108,26 +108,31 @@ const AllTicketPage = () => {
     </div>
   }
 
+  if (user.isFraud) {
+    return  <div className="w-[90%] md:w-[80%] mx-auto bg-white rounded-3xl p-5 md:p-8 border border-slate-200/80 shadow-sm">
+      <h2 className="text-sm md:text-base tracking-wide font-semibold">Marked as Fraud, Can not add ticket!</h2>
+    </div>
+  }
+
   return (
-    <div className="w-[80%] mx-auto my-1 font-sans">
+    <div className="w-[90%] md:w-[80%] mx-auto font-sans">
 
       <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">Add New Ticket</h1>
 
       {/* FORM CONTAINER CARD (Matches Table Container in Dashboard) */}
-      <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-sm">
+      <div className="bg-white rounded-3xl p-5 md:p-8 border border-slate-200/80 shadow-sm">
         {/* Form Header */}
         <div className="mb-8 pb-4 border-b border-slate-100 flex items-center justify-between">
           <div>
 
-            <p className="text-base tracking-wide font-semibold mt-1">
+            <p className="text-sm md:text-base tracking-wide font-semibold">
               Create a new ticket listing for approval and publishing.
             </p>
           </div>
 
           {/* Verification Status Badge (Initial State) */}
           <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 px-3 py-1 rounded-full text-xs font-bold">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-            <span>Initial Status: Pending</span>
+            <span>Status: Pending</span>
           </div>
         </div>
 

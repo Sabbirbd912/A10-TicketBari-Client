@@ -65,7 +65,7 @@ export default function LoginPage() {
     <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 bg-background transition-colors duration-200">
       <Card className="border border-divider shadow-xl mx-auto w-full max-w-md p-6 md:p-8 rounded-2xl bg-card">
         <div className="text-center mb-6">
-          <h1 className="text-xl md:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-neutral-900 to-green-600 dark:from-white dark:to-green-400 bg-clip-text text-transparent">
+          <h1 className="text-xl md:text-3xl font-extrabold tracking-tight bg-linear-to-r from-neutral-900 to-green-600 dark:from-white dark:to-green-400 bg-clip-text text-transparent">
             Welcome Back
           </h1>
           <p className="text-sm font-medium text-default-500 mt-2">

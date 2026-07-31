@@ -79,6 +79,7 @@ export default function SignUpPage() {
       password: password,
       image: photoURL,
       role,
+      // isFraud: false,
       callbackURL: "/",
     });
 

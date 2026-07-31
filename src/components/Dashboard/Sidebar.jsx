@@ -27,7 +27,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex flex-col w-64 h-full shrink-0 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
+    <aside className="flex flex-col w-64 h-full shrink-0 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
       <div className="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800">
         <Link
           href="/"

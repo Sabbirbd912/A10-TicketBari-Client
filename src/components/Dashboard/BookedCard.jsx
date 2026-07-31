@@ -24,9 +24,7 @@ const BookedCard = ({ bookedData }) => {
     },
   );
 
-  const handlePayment = () => {
-
-  }
+  console.log(bookedData.status)
 
   return (
     <div className="w-full max-w-sm mx-auto h-full flex flex-col animate-fade-in-up">

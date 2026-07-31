@@ -1,11 +1,15 @@
 import AdvertiseButton from "@/components/Dashboard/AdvertiseButton";
-import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
-import { Button, Table } from "@heroui/react";
-import Link from "next/link";
+import { Table } from "@heroui/react";
+
 
 const AdvertiseTicketPage = async () => {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets?status=approved`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets?status=approved`,
+    {
+      cache: "no-store",
+    }
+  );
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
   const alltickets = data;
@@ -45,7 +49,7 @@ const AdvertiseTicketPage = async () => {
                   <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
                   <Table.Cell>
                     <div className="flex gap-3">
-                      <AdvertiseButton data={ticket} ></AdvertiseButton>                      
+                      <AdvertiseButton data={ticket} ></AdvertiseButton>
                     </div>
                   </Table.Cell>
                 </Table.Row>)

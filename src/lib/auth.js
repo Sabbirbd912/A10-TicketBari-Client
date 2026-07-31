@@ -22,9 +22,16 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
-        default: "user"
-      }
-    }
+        type: "string",
+        required: false,
+        defaultValue: "user",
+      },
+      isFraud: {
+        type: "boolean",
+        required: false,
+        defaultValue: false,
+      },
+    },
   },
 
   socialProviders: {

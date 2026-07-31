@@ -9,6 +9,8 @@ const AdvertiseButton = ({ data }) => {
 
     const router = useRouter();
 
+    console.log(data)
+
     // advertise button function------------
     const handleAd = async () => {
 

@@ -1,15 +1,16 @@
-import { FileText, PencilToSquare, TrashBin } from "@gravity-ui/icons";
-import { Button, Table } from "@heroui/react";
-import Link from "next/link";
+import UserAction from "@/components/Dashboard/UserAction";
+import { Table } from "@heroui/react";
 
 const ManageUserPage = async () => {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
-  // const res = await fetch("http://localhost:5000/alltickets");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users`,
+    {
+      cache: "no-store",
+    });
+  // const res = await fetch("http://localhost:5000/allusers");
   const data = await res.json();
-  const alltickets = data;
 
-  // console.log(alltickets)
+  const allusers = data;
 
   return (
     <div>
@@ -22,42 +23,28 @@ const ManageUserPage = async () => {
               <Table.Column isRowHeader>#</Table.Column>
               <Table.Column>Photo</Table.Column>
               <Table.Column>Name</Table.Column>
-              <Table.Column>From</Table.Column>
-              <Table.Column>To</Table.Column>
-              <Table.Column>Transport Type</Table.Column>
-              <Table.Column>Price</Table.Column>
-              <Table.Column>Quantity</Table.Column>
+              <Table.Column>Email</Table.Column>
+              <Table.Column>Role</Table.Column>
               <Table.Column>Action</Table.Column>
             </Table.Header>
 
             <Table.Body>
 
               {
-                alltickets.map((ticket,i) => <Table.Row key={i}>
-                <Table.Cell> {i+1} </Table.Cell>
-                <Table.Cell> <div className='w-12 h-12 bg-cover rounded-sm p-1' style={{ backgroundImage: `url(${ticket.image_url})` }}></div> </Table.Cell>
-                <Table.Cell> {ticket.ticket_title} </Table.Cell>
-                <Table.Cell> {ticket.from_location} </Table.Cell>
-                <Table.Cell> {ticket.to_location} </Table.Cell>
-                <Table.Cell> {ticket.transport_type} </Table.Cell>
-                <Table.Cell> {ticket.price} </Table.Cell>
-                <Table.Cell> {ticket.ticket_quantity} </Table.Cell>
-                <Table.Cell>
-                  <div className="flex gap-3">
-                    <Button isIconOnly variant="secondary">
-                      <PencilToSquare />
-                    </Button>
-                    <Button isIconOnly variant="secondary">
-                      <FileText />
-                    </Button>
-                    <Button isIconOnly variant="danger">
-                      <TrashBin />
-                    </Button>
-                  </div>
-                </Table.Cell>
-              </Table.Row> )
+                allusers.map((user, i) => <Table.Row key={i}>
+                  <Table.Cell> {i + 1} </Table.Cell>
+                  <Table.Cell> <div className='w-12 h-12 bg-cover rounded-sm p-1' style={{ backgroundImage: `url(${user.image})` }}></div> </Table.Cell>
+                  <Table.Cell> {user.name} </Table.Cell>
+                  <Table.Cell> {user.email} </Table.Cell>
+                  <Table.Cell> {user.role} </Table.Cell>
+                  <Table.Cell>
+                    <div className="flex gap-3">
+                      <UserAction user={user}></UserAction>
+                    </div>
+                  </Table.Cell>
+                </Table.Row>)
               }
-              
+
 
             </Table.Body>
           </Table.Content>

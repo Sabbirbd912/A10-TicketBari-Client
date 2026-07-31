@@ -11,7 +11,10 @@ const TransactionHistoryPage = async () => {
 
   const user = userSession?.user;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/payments?user_email=${user.email}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/payments?user_email=${user.email}`,
+    {
+      cache: "no-store",
+    });
   // const res = await fetch("http://localhost:5000/allpayments");
   const data = await res.json();
   const allpayments = data;

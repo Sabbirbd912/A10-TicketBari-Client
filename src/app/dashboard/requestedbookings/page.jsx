@@ -17,7 +17,10 @@ const RequestedBookings = async () => {
 
   console.log(user)
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings?vendor_email=${user.email}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings?vendor_email=${user.email}`,
+    {
+      cache: "no-store",
+    });
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
   const alltickets = data;
@@ -27,7 +30,7 @@ const RequestedBookings = async () => {
   return (
     <div>
       <h1 className="mb-5 font-semibold text-neutral-600 dark:text-white text-2xl tracking-wide">
-        Available Requested Booking
+        Requested Booking
       </h1>
       <Table>
         <Table.ScrollContainer>

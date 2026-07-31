@@ -23,24 +23,9 @@ const Navbar = ({ onMobileMenuToggle }) => {
   return (
     <header className="sticky top-0 z-40 h-16 w-full flex items-center justify-between px-4 sm:px-6 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 shrink-0">
       <div className="flex items-center gap-3">
-        <button
-          onClick={onMobileMenuToggle}
-          className="md:hidden p-2 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
-          aria-label="Toggle Menu"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2.5"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
+        <button onClick={onMobileMenuToggle} className="md:hidden p-2 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"   aria-label="Toggle Menu"    >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5"          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"    />
           </svg>
         </button>
 
@@ -58,11 +43,7 @@ const Navbar = ({ onMobileMenuToggle }) => {
           </div>
         ) : user ? (
           <Dropdown>
-            <Button
-              aria-label="User menu"
-              variant="light"
-              className="flex items-center gap-2 h-auto py-1.5 px-2.5 rounded-full hover:bg-default-100"
-            >
+            <Button aria-label="User menu" variant="light" className="flex items-center gap-2 h-auto py-1.5 px-2.5 rounded-full hover:bg-default-100"            >
               <Avatar>
                 <Avatar.Image src={user?.image} alt={user?.name} />
                 <Avatar.Fallback>
@@ -81,46 +62,24 @@ const Navbar = ({ onMobileMenuToggle }) => {
             </Button>
 
             <Dropdown.Popover className="bg-background border border-divider shadow-xl rounded-xl min-w-50">
-              <Dropdown.Menu
-                onAction={(key) => console.log(`Selected: ${key}`)}
-              >
-                <Dropdown.Item
-                  key="username"
-                  textValue="User Name"
-                  className="border border-[#00BC7D] rounded-xl"
-                >
+              <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)} >
+                <Dropdown.Item key="username" textValue="User Name" className="border border-[#00BC7D] rounded-xl" >
                   <Label className="cursor-pointer font-medium text-sm text-[#00BC7D] ">
                     {user?.name}
                   </Label>
                 </Dropdown.Item>
 
-                <Dropdown.Item
-                  key="logout"
-                  textValue="Log Out"
-                  variant="danger"
-                >
-                  <button
-                    onClick={logOut}
-                    className="flex items-center gap-2 w-full text-danger py-1 cursor-pointer"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                      />
+                <Dropdown.Item key="logout" textValue="Log Out" variant="danger"   >
+                  <button onClick={logOut}  className="flex items-center gap-2 w-full text-danger py-1 cursor-pointer" >
+                    <svg className="w-4 h-4"  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"  />
                     </svg>
                     <Label className="cursor-pointer font-medium text-sm">
                       Log Out
                     </Label>
                   </button>
                 </Dropdown.Item>
+
               </Dropdown.Menu>
             </Dropdown.Popover>
           </Dropdown>

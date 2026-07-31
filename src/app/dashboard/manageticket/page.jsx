@@ -7,7 +7,10 @@ import Link from "next/link";
 
 const ManageTicketPage = async () => {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/alltickets`,
+    {
+      cache: "no-store",
+    });
   // const res = await fetch("http://localhost:5000/alltickets");
   const data = await res.json();
   const alltickets = data;

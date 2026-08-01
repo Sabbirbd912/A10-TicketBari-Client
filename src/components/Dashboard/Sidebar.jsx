@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useSession } from "@/lib/auth-client";
+import LoadingSpinner from "../LoadingSpinner";
 
 const NavLink = ({ href, icon, children, pathname }) => {
   const isActive = pathname === href;
@@ -11,11 +13,10 @@ const NavLink = ({ href, icon, children, pathname }) => {
   return (
     <Link
       href={href}
-      className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${
-        isActive
-          ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
-          : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
-      }`}
+      className={`w-full h-10 rounded-xl font-bold flex items-center px-3 text-sm gap-2 transition-all active:scale-[0.98] ${isActive
+        ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400"
+        : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
+        }`}
     >
       <span>{icon}</span>
       {children}
@@ -24,7 +25,58 @@ const NavLink = ({ href, icon, children, pathname }) => {
 };
 
 const Sidebar = () => {
+
+  const { data, isPending } = useSession();
+  const user = data?.user;
+
+  const userNavLinks = [
+    { icon: "📈", href: "/dashboard", label: "Dashboard" },
+    { icon: "👤", href: "/dashboard/profile", label: "My Profile" },
+    { icon: "📋", href: "/dashboard/mybookings", label: "My Booked Tickets" },
+    { icon: "💳", href: "/dashboard/transaction-history", label: "My Transaction" },
+  ];
+
+  const vendorNavLinks = [
+    { icon: "📈", href: "/dashboard", label: "Dashboard" },
+    { icon: "👤", href: "/dashboard/profile", label: "My Profile" },
+    { icon: "➕", href: "/dashboard/addticket", label: "Add Tickets" },
+    { icon: "🆕", href: "/dashboard/addedtickets", label: "Added Tickets" },
+    { icon: "📋", href: "/dashboard/requestedbookings", label: "Requested Bookings" },
+    { icon: "📈", href: "/dashboard/revenue-overview", label: "Revenue Overview" }
+  ];
+
+  const adminNavLinks = [
+    { icon: "📈", href: "/dashboard", label: "Dashboard" },
+    { icon: "👤", href: "/dashboard/profile", label: "My Profile" },
+    { icon: "📊", href: "/dashboard/manageticket", label: "Manage Ticket" },
+    { icon: "🧑", href: "/dashboard/manage-user", label: "Manage User" },
+    { icon: "🎫", href: "/dashboard/advertise-tickets", label: "Advertise Tickets" }
+  ];
+
+  const navLinksMap = {
+    user: userNavLinks,
+    vendor: vendorNavLinks,
+    admin: adminNavLinks
+  }
+
+  const navItems = navLinksMap[user?.role || 'user'];
+
   const pathname = usePathname();
+
+  const navContent = <div className="flex-1 overflow-y-auto p-4 space-y-1">
+    {navItems.map((item) => (
+      <NavLink
+        key={item.label}
+        href={item.href}
+        icon={item.icon}
+        pathname={pathname}
+      >
+        {item.label}
+      </NavLink>
+    ))}
+  </div>
+
+  if (isPending) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <aside className="flex flex-col w-64 h-full shrink-0 border-r border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
@@ -46,7 +98,8 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-1">
+      {navContent}
+      {/* <div className="flex-1 overflow-y-auto p-4 space-y-1">
         <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 mb-2">
           Discover
         </p>
@@ -106,7 +159,7 @@ const Sidebar = () => {
         >
           Advertise Tickets
         </NavLink>
-      </div>
+      </div> */}
 
       {/* User Footer Profile */}
       <div className="p-4 border-t border-slate-100 dark:border-slate-800">

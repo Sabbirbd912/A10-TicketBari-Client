@@ -57,7 +57,7 @@ export default function BookingModal({ ticket }) {
       created_at: new Date()
     };
 
-    console.log(bookingData);
+    // console.log(bookingData);
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addbooking`, {
       method: 'POST',
@@ -69,7 +69,7 @@ export default function BookingModal({ ticket }) {
 
     const resdata = await res.json();
 
-    console.log(resdata);
+    // console.log(resdata);
 
     if (resdata.insertedId) {
       Swal.fire({
@@ -80,7 +80,7 @@ export default function BookingModal({ ticket }) {
         timer: 1000
       });
 
-      router.push("/dashboard/mybookings");
+      router.push("/dashboard/user/mybookings");
     }
 
     setIsOpen(false);

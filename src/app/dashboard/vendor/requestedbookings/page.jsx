@@ -15,7 +15,7 @@ const RequestedBookings = async () => {
 
   const user = session?.user;
 
-  console.log(user)
+  // console.log(user)
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings?vendor_email=${user.email}`,
     {

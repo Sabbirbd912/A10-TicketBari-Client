@@ -27,7 +27,7 @@ const TicketDetailPage = async ({ params }) => {
   }
 
   const ticket = await res.json();
-  console.log(ticket);
+  // console.log(ticket);
 
   // Format the ISO date string into something human-readable
   const formattedDate = new Date(ticket.departure_date_time).toLocaleString(

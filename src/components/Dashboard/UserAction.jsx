@@ -17,6 +17,10 @@ const UserAction = ({ user }) => {
         return <LoadingSpinner></LoadingSpinner>
     }
 
+    if (!currentUser) {
+        return <h2>Unauthorized!</h2>
+    }
+
     // console.log(user.email)
 
     // make admin button fuction

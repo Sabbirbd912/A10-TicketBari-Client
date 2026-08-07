@@ -116,6 +116,7 @@ export default function BookingRoadmap() {
 
   return (
     <section className="relative w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-zinc-950 transition-colors duration-300 overflow-hidden">
+      {/* Background Image Layer */}
       <div
         className="absolute inset-0 opacity-10 dark:opacity-[0.03] pointer-events-none bg-center bg-no-repeat bg-contain mix-blend-multiply dark:mix-blend-normal"
         style={{

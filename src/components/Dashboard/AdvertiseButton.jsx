@@ -9,7 +9,7 @@ const AdvertiseButton = ({ data }) => {
 
     const router = useRouter();
 
-    console.log(data)
+    // console.log(data)
 
     // advertise button function------------
     const handleAd = async () => {
@@ -43,10 +43,10 @@ const AdvertiseButton = ({ data }) => {
         );
         const resData = await res.json();
 
-        console.log(popResData)
+        // console.log(popResData)
 
         if (resData.modifiedCount > 0) {
-            console.log("Status updated successfully");
+            // console.log("Status updated successfully");
 
             Swal.fire({
                 position: "top-end",

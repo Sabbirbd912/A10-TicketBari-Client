@@ -19,7 +19,7 @@ const TransactionHistoryPage = async () => {
   const data = await res.json();
   const allpayments = data;
 
-  console.log(allpayments)
+  // console.log(allpayments)
 
   return (
     <div>

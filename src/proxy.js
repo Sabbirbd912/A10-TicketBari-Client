@@ -16,5 +16,20 @@ export async function proxy(request) {
 }
 
 export const config = {
-    matcher: ['/dashboard', '/dashboard/mybookings', '/dashboard/profile', '/dashboard/addticket', '/dashboard/manageticket', '/dashboard/addedtickets', '/dashboard/editticket/:path', '/alltickets/:path'],
+    matcher: [
+        '/dashboard', 
+        '/dashboard/profile', 
+        '/dashboard/mybookings', 
+        '/dashboard/addticket', 
+        '/dashboard/addedtickets', 
+        '/dashboard/requestedbookings', 
+        '/dashboard/revenue-overview', 
+        '/dashboard/mybookings', 
+        '/dashboard/transaction-history', 
+        '/dashboard/manageticket', 
+        '/dashboard/manage-user', 
+        '/dashboard/advertise-tickets', 
+        '/dashboard/editticket/:path', 
+        '/alltickets/:path'
+    ],
 }

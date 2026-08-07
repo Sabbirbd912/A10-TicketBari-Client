@@ -21,6 +21,7 @@ export default function NotFound() {
         </p>
 
         <div className="mt-6">
+          {/* সমাধান: legacyBehavior ও passHref সম্পূর্ণ ফেলে দেওয়া হয়েছে */}
           <Link href="/">
             <Button
               color="primary"

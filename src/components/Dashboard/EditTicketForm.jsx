@@ -40,7 +40,7 @@ const EditTicketForm = ({ id }) => {
 
     }
 
-    console.log(ticket)
+    // console.log(ticket)
 
     if (isPending || loading) {
         return <div className="flex items-center justify-center w-8 h-8 mx-auto">

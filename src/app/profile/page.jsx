@@ -20,7 +20,7 @@ const ProfilePage = () => {
     return (
       <div className="max-w-md mx-auto mt-10 p-4">
         <Card className="border border-danger bg-danger-50 text-danger text-center p-4">
-          Failed to load profile. Please try again.
+          Failed to load profile. Please Try Again.
         </Card>
       </div>
     );
@@ -30,7 +30,7 @@ const ProfilePage = () => {
     return (
       <div className="max-w-md mx-auto mt-10 p-4">
         <Card className="text-center p-6">
-          <p className="text-default-600 font-medium">You are not logged in.</p>
+          <p className="text-default-600 font-medium">You Are Not Logged In.</p>
         </Card>
       </div>
     );

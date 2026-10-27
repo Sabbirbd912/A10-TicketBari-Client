@@ -105,7 +105,7 @@ const AboutPage = () => {
             </h2>
             <p className="mt-4 text-sky-100 text-sm sm:text-base leading-relaxed">
               Book your tickets today with TicketBari and experience seamless
-              travel across the globe with exclusive offers.
+              travel across the globe with Wanderfull offers.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <Link href="/alltickets">

@@ -23,6 +23,7 @@ export default function Home() {
       <LatestTicket />
       <AboutDiscover />
       <BookingRoadmap />
+      {/* New Component line FQA should be added here */}
     </div>
   );
 }

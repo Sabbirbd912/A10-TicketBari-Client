@@ -5,6 +5,7 @@ import BookingRoadmap from "@/components/BookingRoadmap";
 import AboutDiscover from "@/components/AboutDiscover";
 import LatestTicket from "@/components/LatestTicket";
 import SearchBox from "@/components/SearchBox";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <LatestTicket />
       <AboutDiscover />
       <BookingRoadmap />
+      <FAQ />
     </div>
   );
 }
